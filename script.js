@@ -17,7 +17,9 @@ function initializeWebsite() {
 }
 
 function showWelcomeMessage() {
-    // Check if welcome has been shown in this session
+    // Show only on index.html
+    if (!window.location.pathname.includes("index.html")) return;
+
     if (!isWelcomeShown) {
         setTimeout(function() {
             alert('🌸 Welcome to The Wandering Bloom!\n\nDiscover our exquisite collection of handcrafted floral arrangements for every special moment in your life.\n\n✨ Enjoy browsing our curated collections!');
