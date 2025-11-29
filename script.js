@@ -17,8 +17,10 @@ function initializeWebsite() {
 }
 
 function showWelcomeMessage() {
-    // Show only on index.html
-    if (!window.location.pathname.includes("index.html")) return;
+    const path = window.location.pathname;
+
+    // Show on index.html OR root "/"
+    if (!(path.includes("index.html") || path === "/" || path === "")) return;
 
     if (!isWelcomeShown) {
         setTimeout(function() {
@@ -28,6 +30,7 @@ function showWelcomeMessage() {
         }, 500);
     }
 }
+
 
 function shopNowClick() {
     console.log('🛍️ User clicked Shop Now button - Navigation triggered');
