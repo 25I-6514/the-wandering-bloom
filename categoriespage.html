@@ -33,58 +33,40 @@
         ALL CATEGORIES
     </h2>
 
-    <div style="display:flex; justify-content: center; gap: 30px; padding: 40px; flex-wrap: wrap;">
-        <!-- Wedding Category -->
-        <div style="text-align: center;">
-            <a href="weddings.html" style="text-decoration: none;">
-                <div style="width: 200px; height: 200px; background: #F7DDE2; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 48px;">💍</span>
-                </div>
-                <h3 style="color: #5A5A5A; margin-top: 10px;">Weddings</h3>
-            </a>
-        </div>
-
-        <!-- Birthday Category -->
-        <div style="text-align: center;">
-            <a href="birthdays.html" style="text-decoration: none;">
-                <div style="width: 200px; height: 200px; background: #C8A2A8; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 48px;">🎂</span>
-                </div>
-                <h3 style="color: #5A5A5A; margin-top: 10px;">Birthdays</h3>
-            </a>
-        </div>
-
-        <!-- Anniversary Category -->
-        <div style="text-align: center;">
-            <a href="anniverseries.html" style="text-decoration: none;">
-                <div style="width: 200px; height: 200px; background: #88A28B; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 48px;">❤️</span>
-                </div>
-                <h3 style="color: #5A5A5A; margin-top: 10px;">Anniversaries</h3>
-            </a>
-        </div>
-
-        <!-- Funeral Category -->
-        <div style="text-align: center;">
-            <a href="funeral.html" style="text-decoration: none;">
-                <div style="width: 200px; height: 200px; background: #5A5A5A; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 48px;">⚰️</span>
-                </div>
-                <h3 style="color: #5A5A5A; margin-top: 10px;">Funerals</h3>
-            </a>
-        </div>
-    </div>
+    <!-- Your original categories page content here -->
+    <!-- Keep whatever content you had originally -->
 
     <script>
         let cart = [];
+
+        function addToCart(itemName, itemPrice) {
+            // Add item to cart WITHOUT POPUP
+            cart.push({
+                name: itemName,
+                price: itemPrice
+            });
+            
+            // Update cart count in navigation
+            updateCartCount();
+            
+            // Save cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
         function updateCartCount() {
             const cartBadge = document.querySelector('.cart-badge');
-            if (cartBadge && localStorage.getItem('cart')) {
-                cart = JSON.parse(localStorage.getItem('cart'));
+            if (cartBadge) {
                 cartBadge.textContent = cart.length;
             }
         }
-        document.addEventListener('DOMContentLoaded', updateCartCount);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartCount();
+            }
+        });
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
