@@ -31,13 +31,14 @@ function showWelcomeMessage() {
     }
 }
 
-
 function shopNowClick() {
     console.log('🛍️ User clicked Shop Now button - Navigation triggered');
-    alert('🌺 Redirecting to our Shop page...\n\nYou\'ll find our complete collection of beautiful floral arrangements organized by categories!');
-
-    console.log('→ Navigation to shop page initiated');
+    alert('🌺 Redirecting to our Top Sellers page...');
+    window.location.href = "topseller.html";
+    console.log('→ Navigation to Top Sellers page initiated');
 }
+
+
 
 function viewCategory(categoryName) {
     console.log(`👁️ User viewing category: ${categoryName}`);
