@@ -32,10 +32,8 @@ function showWelcomeMessage() {
 }
 
 function shopNowClick() {
-    console.log('🛍️ User clicked Shop Now button - Navigation triggered');
-    alert('🌺 Redirecting to our Top Sellers page...');
+    console.log('🛍️ User clicked Shop Now button');
     window.location.href = "topseller.html";
-    console.log('→ Navigation to Top Sellers page initiated');
 }
 
 
