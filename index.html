@@ -8,25 +8,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header - Friend's Design -->
-<header class="main-header">
-    <div class="rectangle">
-        <div class="menu">
-            <a href="index.html" class="active">HOME</a>
-            <a href="categories.html">SHOP</a>
-            <a href="contact.html">CONTACT</a>
-            <a href="about.html">ABOUT</a>
-            <a href="cart.html" class="cart-link">CART <span class="cart-badge">0</span></a>
+    <!-- Header - Updated Navigation -->
+    <header class="main-header">
+        <div class="rectangle">
+            <div class="menu">
+                <a href="index.html" class="active">HOME</a>
+                <a href="categoriespage.html">CATEGORIES</a>
+                <a href="topseller.html">TOP SELLERS</a>
+                <a href="contact.html">CONTACT</a>
+                <a href="about.html">ABOUT</a>
+                <a href="cart.html" class="cart-link">CART <span class="cart-badge">0</span></a>
+            </div>
         </div>
-    </div>
-    <div class="logo-section">
-        <div class="logo">
-            <span class="logo-icon">🌸</span>
-            The Wandering Bloom
+        <div class="logo-section">
+            <div class="logo">
+                <span class="logo-icon">🌸</span>
+                The Wandering Bloom
+            </div>
+            <p class="tagline">Curated Floral Excellence</p>
         </div>
-        <p class="tagline">Curated Floral Excellence</p>
-    </div>
-</header>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -81,7 +82,7 @@
                 <p class="section-subtitle">Celebrate life's special moments with our curated collections</p>
             </div>
             <div class="occasions-grid">
-                <!-- Wedding Card - FIXED -->
+                <!-- Wedding Card -->
                 <div class="occasion-card" data-category="weddings">
                     <div class="occasion-image">
                         <img src="wedding.jpg" alt="Wedding flowers" style="width: 100%; height: 100%; object-fit: cover;">
@@ -90,28 +91,28 @@
                     <div class="occasion-content">
                         <h3>Weddings</h3>
                         <p>Elegant arrangements for your special day</p>
-                        <button class="btn-secondary" onclick="viewCategory('Weddings')">
+                        <button class="btn-secondary" onclick="viewCategory('weddings.html')">
                             View Collection
                         </button>
                     </div>
                 </div>
                 
-                <!-- Birthday Card - FIXED -->
+                <!-- Birthday Card -->
                 <div class="occasion-card" data-category="birthdays">
                     <div class="occasion-image">
-                        <img src="https://25i-6514.github.io/the-wandering-bloom/birthday.jpg" alt="Birthday flowers" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="birthday.jpg" alt="Birthday flowers" style="width: 100%; height: 100%; object-fit: cover;">
                         <div class="occasion-overlay"></div>
                     </div>
                     <div class="occasion-content">
                         <h3>Birthdays</h3>
                         <p>Vibrant bouquets to brighten their day</p>
-                        <button class="btn-secondary" onclick="viewCategory('Birthdays')">
+                        <button class="btn-secondary" onclick="viewCategory('birthdays.html')">
                             View Collection
                         </button>
                     </div>
                 </div>
                 
-                <!-- Anniversary Card - FIXED -->
+                <!-- Anniversary Card -->
                 <div class="occasion-card" data-category="anniversaries">
                     <div class="occasion-image">
                         <img src="anniversary.jpg" alt="Anniversary flowers" style="width: 100%; height: 100%; object-fit: cover;">
@@ -120,13 +121,13 @@
                     <div class="occasion-content">
                         <h3>Anniversaries</h3>
                         <p>Romantic florals for your celebration</p>
-                        <button class="btn-secondary" onclick="viewCategory('Anniversaries')">
+                        <button class="btn-secondary" onclick="viewCategory('anniverseries.html')">
                             View Collection
                         </button>
                     </div>
                 </div>
                 
-                <!-- Funeral Card - FIXED -->
+                <!-- Funeral Card -->
                 <div class="occasion-card" data-category="funerals">
                     <div class="occasion-image">
                         <img src="funeral.jpg" alt="Funeral flowers" style="width: 100%; height: 100%; object-fit: cover;">
@@ -135,7 +136,7 @@
                     <div class="occasion-content">
                         <h3>Funerals</h3>
                         <p>Respectful tributes to honor memories</p>
-                        <button class="btn-secondary" onclick="viewCategory('Funerals')">
+                        <button class="btn-secondary" onclick="viewCategory('funeral.html')">
                             View Collection
                         </button>
                     </div>
@@ -152,7 +153,7 @@
             <p class="section-subtitle">Find the perfect palette for your arrangement</p>
         </div>
         <div class="themes-grid">
-            <!-- Sage Green Theme - FIXED -->
+            <!-- Sage Green Theme -->
             <div class="theme-card" data-theme="sage">
                 <div class="theme-color">
                     <img src="sage-green.jpg" alt="Sage Green theme" style="width: 100%; height: 100%; object-fit: cover;">
@@ -161,13 +162,13 @@
                 <div class="theme-content">
                     <h3>Sage Green</h3>
                     <p>Tranquil & Natural</p>
-                    <button class="btn-outline" onclick="viewTheme('Sage Green')">
+                    <button class="btn-outline" onclick="viewTheme('sagegreen.html')">
                         Explore
                     </button>
                 </div>
             </div>
 
-            <!-- Black Night Theme - FIXED -->
+            <!-- Black Night Theme -->
             <div class="theme-card" data-theme="black">
                  <div class="theme-color">
                     <img src="black-night.jpg" alt="Black Night theme" style="width: 100%; height: 100%; object-fit: cover;">
@@ -176,13 +177,13 @@
                 <div class="theme-content">
                 <h3>Black Night</h3>
                 <p>Dramatic & Sophisticated</p>
-                <button class="btn-outline" onclick="viewTheme('Black Night')">
+                <button class="btn-outline" onclick="viewTheme('black.html')">
                  Explore
                 </button>
                  </div>
                 </div>
 
-            <!-- Terracotta Theme - FIXED -->
+            <!-- Terracotta Theme -->
             <div class="theme-card" data-theme="terracotta">
                 <div class="theme-color">
                     <img src="terracotta.jpg" alt="Terracotta theme" style="width: 100%; height: 100%; object-fit: cover;">
@@ -191,13 +192,13 @@
                 <div class="theme-content">
                     <h3>Terracotta</h3>
                     <p>Warm & Earthy</p>
-                    <button class="btn-outline" onclick="viewTheme('Terracotta')">
+                    <button class="btn-outline" onclick="viewTheme('terracotta.html')">
                         Explore
                     </button>
                 </div>
             </div>
 
-            <!-- Blush Pink Theme - FIXED -->
+            <!-- Blush Pink Theme -->
             <div class="theme-card" data-theme="blush">
                 <div class="theme-color">
                     <img src="blush-pink.jpg" alt="Blush Pink theme" style="width: 100%; height: 100%; object-fit: cover;">
@@ -206,7 +207,7 @@
                 <div class="theme-content">
                     <h3>Blush Pink</h3>
                     <p>Soft & Delicate</p>
-                    <button class="btn-outline" onclick="viewTheme('Blush Pink')">
+                    <button class="btn-outline" onclick="viewTheme('blushpink.html')">
                         Explore
                     </button>
                 </div>
@@ -276,11 +277,11 @@
                 <div class="col-md-4 footer-col">
                     <h4>Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="about.html">About Us</a></li>
                         <li><a href="#">Delivery Information</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">FAQs</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
             </div>
@@ -300,5 +301,18 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        function shopNowClick() {
+            window.location.href = 'categories.html';
+        }
+        
+        function viewCategory(page) {
+            window.location.href = page;
+        }
+        
+        function viewTheme(page) {
+            window.location.href = page;
+        }
+    </script>
 </body>
 </html>
