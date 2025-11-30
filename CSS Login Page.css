@@ -41,7 +41,7 @@ a {
 }
 
 .menu a {
-    color: white;
+    color: black;
     font-weight: bold;
     font-size: 15px;
     letter-spacing: 1px;
@@ -251,3 +251,4 @@ input:focus {
         padding: 20px;
     }
 }
+
