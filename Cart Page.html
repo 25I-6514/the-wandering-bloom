@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="categoriespage.css">
-    <title> The Wandering Bloom</title>
+    <title>The Wandering Bloom - Cart</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header - Updated Navigation -->
+    <!-- Header -->
     <header class="main-header">
         <div class="rectangle">
             <div class="menu">
-                <a href="home.html" class="active">HOME</a>
+                <a href="home.html">HOME</a>
                 <a href="categoriespage.html">CATEGORIES</a>
                 <a href="topseller.html">TOP SELLERS</a>
-                <a href="#contact-section">CONTACT</a>
-                <a href="#about-section">ABOUT</a>
+                <a href="home.html#footer">CONTACT</a>
+                <a href="home.html#footer">ABOUT</a>
                 <a href="Cart Page.html" class="cart-link">CART <span class="cart-badge">0</span></a>
             </div>
         </div>
@@ -28,93 +28,175 @@
         </div>
     </header>
 
-    <h1>The Wandering Bloom</h1>
-     <hr class="line">
+    <!-- Main Content -->
+    <div class="container">
+        <h1 style="text-align: center; margin: 40px 0 20px; color: var(--text-dark);">Your Shopping Cart</h1>
+        
+        <div class="cart-container">
+            <div class="cart-table-container">
+                <table class="cart-table" id="cartTable">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Cart items will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
 
-    <h1 style="text-align: center; color:#000000">Your Shopping Cart</h1>
+            <div class="cart-summary">
+                <div class="summary-card">
+                    <h3>Order Summary</h3>
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">PKR 0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery:</span>
+                        <span id="delivery">PKR 200</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="total">PKR 200</span>
+                    </div>
+                    <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+                    <button class="continue-shopping" onclick="continueShopping()">Continue Shopping</button>
+                </div>
+            </div>
+        </div>
 
-    <div class="cart-container">
-        <table id="cartTable">
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Price (PKR)</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-                <th>Remove</th>
-            </tr>
-        </table>
-
-        <p id="totalBox">Total: PKR 0</p>
-
-        <button class="pay-btn" onclick="proceed()">Proceed to Payment</button>
-
-        <p class="empty-msg" id="emptyMsg" style="display:none;">Your cart is empty!</p>
+        <div class="empty-cart-message" id="emptyMsg">
+            <div class="empty-cart-icon">🛒</div>
+            <h2>Your cart is empty</h2>
+            <p>Looks like you haven't added any items to your cart yet.</p>
+            <button class="continue-shopping" onclick="continueShopping()">Browse Products</button>
+        </div>
     </div>
 
-
     <script>
+        // Cart functionality
         let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
         function displayCart() {
-            const table = document.getElementById("cartTable");
-            while (table.rows.length > 1) table.deleteRow(1);
+            const tableBody = document.querySelector('#cartTable tbody');
+            const emptyMsg = document.getElementById('emptyMsg');
+            const subtotalEl = document.getElementById('subtotal');
+            const totalEl = document.getElementById('total');
+            const deliveryEl = document.getElementById('delivery');
+
+            // Clear table
+            tableBody.innerHTML = '';
 
             if (cart.length === 0) {
-                document.getElementById("emptyMsg").style.display = "block";
-                document.getElementById("totalBox").innerText = "Total: PKR 0";
+                document.querySelector('.cart-container').style.display = 'none';
+                emptyMsg.style.display = 'flex';
+                updateCartBadge();
                 return;
-            } else {
-                document.getElementById("emptyMsg").style.display = "none";
             }
 
-            let total = 0;
+            document.querySelector('.cart-container').style.display = 'flex';
+            emptyMsg.style.display = 'none';
+
+            let subtotal = 0;
 
             cart.forEach((item, index) => {
-                let row = table.insertRow();
+                const row = document.createElement('tr');
+                const itemSubtotal = item.price * item.quantity;
+                subtotal += itemSubtotal;
 
                 row.innerHTML = `
-                    <td><img src="${item.image}"></td>
-                    <td>${item.name}</td>
-                    <td>${item.price}</td>
-                    <td>
-                        <input type="number" class="qty-box" value="${item.quantity}" min="1"
-                            onchange="updateQty(${index}, this.value)">
+                    <td class="product-cell">
+                        <div class="product-info">
+                            <img src="${item.image}" alt="${item.name}" class="product-image">
+                            <div class="product-details">
+                                <h4 class="product-name">${item.name}</h4>
+                            </div>
+                        </div>
                     </td>
-                    <td>${item.price * item.quantity}</td>
-                    <td><button class="remove-btn" onclick="removeItem(${index})">X</button></td>
+                    <td class="price-cell">PKR ${item.price}</td>
+                    <td class="quantity-cell">
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, ${item.quantity - 1})">-</button>
+                            <span class="quantity-display">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, ${item.quantity + 1})">+</button>
+                        </div>
+                    </td>
+                    <td class="subtotal-cell">PKR ${itemSubtotal}</td>
+                    <td class="action-cell">
+                        <button class="remove-btn" onclick="removeItem(${index})">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                            </svg>
+                            Remove
+                        </button>
+                    </td>
                 `;
 
-                total += item.price * item.quantity;
+                tableBody.appendChild(row);
             });
 
-            document.getElementById("totalBox").innerText = "Total: PKR " + total;
+            const delivery = 200;
+            const total = subtotal + delivery;
+
+            subtotalEl.textContent = `PKR ${subtotal}`;
+            deliveryEl.textContent = `PKR ${delivery}`;
+            totalEl.textContent = `PKR ${total}`;
+
+            updateCartBadge();
             localStorage.setItem("totalBill", total);
-            localStorage.setItem("cartItems", JSON.stringify(cart));
         }
 
-        function updateQty(index, qty) {
-            cart[index].quantity = parseInt(qty);
+        function updateQuantity(index, newQuantity) {
+            if (newQuantity < 1) {
+                removeItem(index);
+                return;
+            }
+            cart[index].quantity = newQuantity;
             saveCart();
             displayCart();
         }
+
         function removeItem(index) {
             cart.splice(index, 1);
             saveCart();
             displayCart();
         }
+
         function saveCart() {
             localStorage.setItem("cartItems", JSON.stringify(cart));
         }
-        function proceed() {
+
+        function updateCartBadge() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            const badgeElements = document.querySelectorAll(".cart-badge");
+            badgeElements.forEach(badge => {
+                badge.textContent = totalItems;
+            });
+        }
+
+        function proceedToCheckout() {
             if (cart.length === 0) {
                 alert("Your cart is empty!");
-            } else {
-                window.location.href = "Payment Page.html";
+                return;
             }
+            window.location.href = "Payment Page.html";
         }
-        displayCart();
-        
+
+        function continueShopping() {
+            window.location.href = "categoriespage.html";
+        }
+
+        // Initialize cart display
+        document.addEventListener('DOMContentLoaded', function() {
+            displayCart();
+        });
     </script>
 </body>
 </html>
