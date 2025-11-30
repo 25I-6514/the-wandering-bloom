@@ -1,104 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="CSS Cart Page.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wandering Bloom</title>
+    <title>The Wandering Bloom - Shopping Cart</title>
 </head>
 <body>
-    <div class="rectangle">
-        <div class="menu">
-            <a href="#">
-                <img src = "102123-200.png" alt = "arrow" style="width:30px; height:30px" />
-            </a>
-           <a href="categoriespage.html">HOME</a>
-            <a href="topseller.html">SHOP</a>
-            <a onclick="alert('contact us on wanderingbloom@gmail.com');">CONTACT</a>
-            <a href="about.txt">ABOUT</a>
-            <a href="Cart Page.html">
-                <img src = "C:\Users\Zoya\Desktop\Cart + Payment\shopping-cart-icon-md.png" alt = "cart" style="width:30px; height:30px" />
-            </a>
+    <!-- Fixed Header - Same as Other Pages -->
+    <header class="main-header">
+        <div class="rectangle">
+            <div class="menu">
+                <a href="home.html">HOME</a>
+                <a href="categoriespage.html">CATEGORIES</a>
+                <a href="topseller.html">TOP SELLERS</a>
+                <a href="home.html#contact-section">CONTACT</a>
+                <a href="home.html#about-section">ABOUT</a>
+                <a href="Cart Page.html" class="cart-link">CART <span class="cart-badge">0</span></a>
+            </div>
+        </div>
+        <div class="logo-section">
+            <div class="logo">
+                <span class="logo-icon">🌸</span>
+                The Wandering Bloom
+            </div>
+            <p class="tagline">Curated Floral Excellence</p>
+        </div>
+    </header>
+
+    <!-- Cart Content -->
+    <div class="cart-container">
+        <div class="cart-header">
+            <h2>YOUR SHOPPING CART</h2>
+            <p>Review your selected floral arrangements</p>
+        </div>
+
+        <div class="cart-table-header">
+            <div class="row">
+                <div class="col-md-5">PRODUCT</div>
+                <div class="col-md-2">QUANTITY</div>
+                <div class="col-md-2">PRICE</div>
+                <div class="col-md-2">TOTAL</div>
+                <div class="col-md-1">ACTION</div>
+            </div>
+        </div>
+
+        <div id="products" class="cart-items"></div>
+
+        <div class="cart-summary">
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <div class="total-section">
+                        <div class="subtotal">
+                            <span>Subtotal:</span>
+                            <span>PKR <span id="subtotal">0</span></span>
+                        </div>
+                        <div class="shipping">
+                            <span>Delivery:</span>
+                            <span>PKR 200</span>
+                        </div>
+                        <div class="grand-total">
+                            <span>Total:</span>
+                            <span>PKR <span id="total">200</span></span>
+                        </div>
+                        <button class="checkout-btn" onclick="proceedToCheckout()">PROCEED TO CHECKOUT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="empty-cart-message" id="empty-cart" style="display: none;">
+            <div class="empty-cart-content">
+                <div class="empty-cart-icon">🛒</div>
+                <h3>Your cart is empty</h3>
+                <p>Browse our collections to add beautiful floral arrangements</p>
+                <a href="categoriespage.html" class="btn-primary">SHOP NOW</a>
+            </div>
         </div>
     </div>
-    <h1>The Wandering Bloom</h1>
-    <h2>YOUR SHOPPING CART</h2>
-    <div class="menu">
-        <span>Product</span>
-        <span>Quantity</span>
-        <span>Price</span>
-    </div>
-    <div>
-        <hr class="line">
-    </div>
-    <div id="products" class="cart-box"></div>
-    <div class="cart-total">
-    <h3>Total: PKR <span id="total">0</span></h3>
-    </div>
 
-<script>
+    <script>
+        function displayCart() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const box = document.getElementById("products");
+            const totalSpan = document.getElementById("total");
+            const subtotalSpan = document.getElementById("subtotal");
+            const emptyCart = document.getElementById("empty-cart");
+            const cartBadge = document.querySelector('.cart-badge');
 
-    function displayCart() {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const box = document.getElementById("products");
-        const totalSpan = document.getElementById("total");
+            // Update cart badge
+            if (cartBadge) {
+                cartBadge.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            }
 
-         box.innerHTML = "";
-         let total = 0;
+            if (cart.length === 0) {
+                box.innerHTML = "";
+                emptyCart.style.display = "block";
+                totalSpan.textContent = "0";
+                subtotalSpan.textContent = "0";
+                return;
+            }
 
-        cart.forEach((item, index) => {
-            const itemTotal = item.price * item.quantity;
-            total += itemTotal;
+            emptyCart.style.display = "none";
+            box.innerHTML = "";
+            let subtotal = 0;
 
-            box.innerHTML += `
-            <div class="cart-row">
-                <div class="cart-img">
-                    <img src="${item.image}" style="width:80px; height:80px; object-fit:cover;">
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                box.innerHTML += `
+                <div class="cart-item">
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <div class="product-info">
+                                <div class="product-image">
+                                    <img src="${item.image || 'flower-default.jpg'}" alt="${item.name}">
+                                </div>
+                                <div class="product-details">
+                                    <h4>${item.name}</h4>
+                                    <p class="product-code">SKU: WB-${String(index + 1).padStart(3, '0')}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                                <span class="quantity">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="price">PKR ${item.price}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="item-total">PKR ${itemTotal}</div>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="delete-btn" onclick="removeItem(${index})">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
                 </div>
+                `;
+            });
 
-                <div class="cart-info">
-                    <p class="product-name">${item.name}</p>
-                </div>
-
-                <div class="qty-box">
-                    <button onclick="updateQuantity(${index}, -1)">-</button>
-                    <span>${item.quantity}</span>
-                    <button onclick="updateQuantity(${index}, 1)">+</button>
-                </div>
-
-                <div class="delete-button" onclick="removeItem(${index})">🗑️</div>
-
-                <div class="price">PKR ${itemTotal}</div>
-            </div>
-            <hr>
-            `;
-        });
-
-     totalSpan.textContent = total;
-    }
-
-    function updateQuantity(index, change) {
-         let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-         cart[index].quantity += change;
-
-        if (cart[index].quantity <= 0) {
-          cart.splice(index, 1);
+            const delivery = 200;
+            const total = subtotal + delivery;
+            
+            totalSpan.textContent = total;
+            subtotalSpan.textContent = subtotal;
         }
 
-         localStorage.setItem("cart", JSON.stringify(cart));
-         displayCart();
-    }
+        function updateQuantity(index, change) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            
+            cart[index].quantity += change;
 
-    function removeItem(index) {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-          cart.splice(index, 1);
-          localStorage.setItem("cart", JSON.stringify(cart));
-          displayCart();
-    }
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
 
-    window.onload = displayCart;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            displayCart();
+        }
 
-</script>
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            displayCart();
+        }
+
+        function proceedToCheckout() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            if (cart.length === 0) {
+                alert('Your cart is empty. Please add items before checkout.');
+                return;
+            }
+            alert('Proceeding to checkout...');
+            // Here you would redirect to checkout page: window.location.href = 'checkout.html';
+        }
+
+        window.onload = displayCart;
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
