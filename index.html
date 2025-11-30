@@ -4,16 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - The Wandering Bloom</title>
-    <link rel="stylesheet" href="CSS Login Page.css">
+    <link rel="stylesheet" href="CSS_Login_Page.css">
 </head>
 <body>
-    <!-- Enhanced Header -->
+
+    <!-- Header -->
     <header class="main-header">
-        <div class="header-decoration">
-            <span class="deco-flower">✿</span>
-            <span class="deco-flower">✿</span>
-            <span class="deco-flower">✿</span>
-        </div>
         <div class="rectangle">
             <div class="menu">
                 <a href="#" onclick="showLoginAlert(event)">HOME</a>
@@ -24,20 +20,19 @@
                 <a href="#" onclick="showLoginAlert(event)" class="cart-link">CART <span class="cart-badge">0</span></a>
             </div>
         </div>
+
         <div class="logo-section">
             <div class="logo-container">
-                <div class="logo-flourish left">◈</div>
                 <a href="#" onclick="showLoginAlert(event)" class="logo">
                     <span class="logo-icon">🌸</span>
                     <span class="logo-text">The Wandering Bloom</span>
                 </a>
-                <div class="logo-flourish right">◈</div>
             </div>
             <p class="tagline">✦ Curated Floral Excellence ✦</p>
         </div>
     </header>
 
-    <!-- Login Container -->
+    <!-- Login Box -->
     <div class="login-container">
         <div class="login-box">
             <div class="login-header">
@@ -45,10 +40,10 @@
                 <h2>WELCOME BACK</h2>
                 <div class="flower-accent">🌺</div>
             </div>
+
             <hr class="line">
-            
             <div id="error-message" class="error-message"></div>
-            
+
             <form id="login-form">
                 <div class="form-row">
                     <label for="username">Username</label>
@@ -57,6 +52,7 @@
                         <input type="text" id="username" name="username" placeholder="Enter your username" required>
                     </div>
                 </div>
+
                 <div class="form-row">
                     <label for="password">Password</label>
                     <div class="input-wrapper">
@@ -64,9 +60,10 @@
                         <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     </div>
                 </div>
+
                 <button type="submit" class="login-btn">LOGIN</button>
             </form>
-            
+
             <div class="sign-up">
                 <span>Don't have an account?</span>
                 <a href="Sign Up Page.html">Sign Up</a>
@@ -75,54 +72,43 @@
     </div>
 
     <script>
-        // Function to show login alert when header links are clicked
         function showLoginAlert(event) {
             event.preventDefault();
             alert('🔒 Please login first to access this page!');
         }
 
-        // Login form handler
-        document.getElementById('login-form').addEventListener('submit', function(e) {
+        document.getElementById('login-form').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
             const errorMessage = document.getElementById('error-message');
-            
-            // Get all registered users from localStorage
+
             const users = JSON.parse(localStorage.getItem('users') || '[]');
-            
-            // Check if user exists and password matches
+
             const user = users.find(u => u.username === username && u.password === password);
-            
+
             if (user) {
-                // Successful login
                 localStorage.setItem('currentUser', JSON.stringify({
                     username: user.username,
                     fullname: user.fullname,
                     email: user.email
                 }));
-                
+
                 alert('✅ Welcome back, ' + user.fullname + '!');
                 window.location.href = 'home.html';
             } else {
-                // Check if username exists
-                const usernameExists = users.some(u => u.username === username);
-                
-                if (usernameExists) {
-                    errorMessage.textContent = '❌ Incorrect password. Please try again.';
-                } else {
-                    errorMessage.textContent = '❌ Username not found. Please sign up first.';
-                }
-                
-                errorMessage.style.display = 'block';
-                
-                // Hide error after 3 seconds
-                setTimeout(function() {
-                    errorMessage.style.display = 'none';
-                }, 3000);
+                const exists = users.some(u => u.username === username);
+                errorMessage.textContent = exists
+                    ? '❌ Incorrect password. Please try again.'
+                    : '❌ Username not found. Please sign up first.';
+
+                errorMessage.style.display = "block";
+
+                setTimeout(() => errorMessage.style.display = "none", 3000);
             }
         });
     </script>
+
 </body>
 </html>
