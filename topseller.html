@@ -8,7 +8,7 @@
     <title>The Wandering Bloom - Categories</title>
 </head>
 <body>
-    <!-- Fixed Header -->
+  
     <header class="main-header">
         <div class="rectangle">
             <div class="menu">
@@ -80,21 +80,21 @@
     </div>
 
    <script>
-    // Cart functionality
+   
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
     
-    // Update cart badge on page load
+    
     updateCartBadge();
     
     function addToCart(itemName, itemPrice, itemImage) {
-        // Check if item already exists in cart
+       
         const existingItem = cart.find(item => item.name === itemName);
         
         if (existingItem) {
-            // If item exists, increase quantity
+           
             existingItem.quantity += 1;
         } else {
-            // If item doesn't exist, add new item
+            
             cart.push({
                 name: itemName,
                 price: parseInt(itemPrice),
@@ -103,21 +103,21 @@
             });
         }
         
-        // Save to localStorage
+       
         localStorage.setItem("cartItems", JSON.stringify(cart));
         
-        // Update cart badge
+       
         updateCartBadge();
         
-        // Show confirmation
+      
         alert(itemName + " has been added to your cart!");
     }
     
     function updateCartBadge() {
-        // Calculate total items in cart
+        
         const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
         
-        // Update badge text
+    
         const badgeElements = document.querySelectorAll(".cart-badge");
         badgeElements.forEach(badge => {
             badge.textContent = totalItems;
@@ -127,6 +127,7 @@
 
 </body>
 </html>
+
 
 
 
