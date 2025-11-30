@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="categoriespage.css">
+    <title> The Wandering Bloom</title>
+</head>
+<body>
+    <!-- Header - Updated Navigation -->
+    <header class="main-header">
+        <div class="rectangle">
+            <div class="menu">
+                <a href="home.html" class="active">HOME</a>
+                <a href="categoriespage.html">CATEGORIES</a>
+                <a href="topseller.html">TOP SELLERS</a>
+                <a href="#contact-section">CONTACT</a>
+                <a href="#about-section">ABOUT</a>
+                <a href="Cart Page.html" class="cart-link">CART <span class="cart-badge">0</span></a>
+            </div>
+        </div>
+        <div class="logo-section">
+            <div class="logo">
+                <span class="logo-icon">🌸</span>
+                The Wandering Bloom
+            </div>
+            <p class="tagline">Curated Floral Excellence</p>
+        </div>
+    </header>
+
+    <h1>The Wandering Bloom</h1>
+     <hr class="line">
+
+    <h1 style="text-align: center; color:#000000">Your Shopping Cart</h1>
+
+    <div class="cart-container">
+        <table id="cartTable">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price (PKR)</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Remove</th>
+            </tr>
+        </table>
+
+        <p id="totalBox">Total: PKR 0</p>
+
+        <button class="pay-btn" onclick="proceed()">Proceed to Payment</button>
+
+        <p class="empty-msg" id="emptyMsg" style="display:none;">Your cart is empty!</p>
+    </div>
+
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+        function displayCart() {
+            const table = document.getElementById("cartTable");
+            while (table.rows.length > 1) table.deleteRow(1);
+
+            if (cart.length === 0) {
+                document.getElementById("emptyMsg").style.display = "block";
+                document.getElementById("totalBox").innerText = "Total: PKR 0";
+                return;
+            } else {
+                document.getElementById("emptyMsg").style.display = "none";
+            }
+
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                let row = table.insertRow();
+
+                row.innerHTML = `
+                    <td><img src="${item.image}"></td>
+                    <td>${item.name}</td>
+                    <td>${item.price}</td>
+                    <td>
+                        <input type="number" class="qty-box" value="${item.quantity}" min="1"
+                            onchange="updateQty(${index}, this.value)">
+                    </td>
+                    <td>${item.price * item.quantity}</td>
+                    <td><button class="remove-btn" onclick="removeItem(${index})">X</button></td>
+                `;
+
+                total += item.price * item.quantity;
+            });
+
+            document.getElementById("totalBox").innerText = "Total: PKR " + total;
+            localStorage.setItem("totalBill", total);
+            localStorage.setItem("cartItems", JSON.stringify(cart));
+        }
+
+        function updateQty(index, qty) {
+            cart[index].quantity = parseInt(qty);
+            saveCart();
+            displayCart();
+        }
+        function removeItem(index) {
+            cart.splice(index, 1);
+            saveCart();
+            displayCart();
+        }
+        function saveCart() {
+            localStorage.setItem("cartItems", JSON.stringify(cart));
+        }
+        function proceed() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+            } else {
+                window.location.href = "Payment Page.html";
+            }
+        }
+        displayCart();
+        
+    </script>
+</body>
+</html>
