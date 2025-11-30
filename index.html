@@ -7,25 +7,13 @@
     <link rel="stylesheet" href="CSS Login Page.css">
 </head>
 <body>
-    <!-- Header matching main site -->
-    <header class="main-header">
-        <div class="rectangle">
-            <div class="menu">
-                <a href="index.html">HOME</a>
-                <a href="categoriespage.html">CATEGORIES</a>
-                <a href="topseller.html">TOP SELLERS</a>
-                <a href="index.html#contact-section">CONTACT</a>
-                <a href="index.html#about-section">ABOUT</a>
-                <a href="cart.html" class="cart-link">CART <span class="cart-badge">0</span></a>
-            </div>
+    <!-- Simple Header with Shop Name Only -->
+    <header class="simple-header">
+        <div class="logo">
+            <span class="logo-icon">🌸</span>
+            The Wandering Bloom
         </div>
-        <div class="logo-section">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">🌸</span>
-                The Wandering Bloom
-            </a>
-            <p class="tagline">Curated Floral Excellence</p>
-        </div>
+        <p class="tagline">Curated Floral Excellence</p>
     </header>
 
     <!-- Login Container -->
@@ -38,12 +26,12 @@
             
             <form id="login-form">
                 <div class="form-row">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
                 </div>
                 <div class="form-row">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
                 </div>
                 <button type="submit" class="login-btn">LOGIN</button>
             </form>
@@ -64,7 +52,7 @@
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             
-            // Simple validation - you can customize these credentials
+            // Simple validation - customize these credentials
             if (username === 'admin' && password === 'admin123') {
                 // Successful login
                 window.location.href = 'index.html';
