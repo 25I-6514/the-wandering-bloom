@@ -1,6 +1,3 @@
-/* -----------------------------------
-   GLOBAL DEFAULTS
------------------------------------- */
 body {
     font-family: Arial, sans-serif;
     background-color: #ffffff;
@@ -10,17 +7,10 @@ body {
     padding-top: 190px; /* Push content below fixed header */
 }
 
-/* Remove link highlighting */
 a {
     text-decoration: none;
 }
 
-
-/* -----------------------------------
-   HEADER
------------------------------------- */
-
-/* Main container (fixed) */
 .main-header {
     width: 100%;
     position: fixed;
@@ -28,7 +18,6 @@ a {
     z-index: 1000;
 }
 
-/* Green navigation bar */
 .top-menu-bar {
     background: #7d9b7f; /* soft green */
     padding: 12px 0;
@@ -50,8 +39,6 @@ a {
 .menu a:hover {
     opacity: 0.85;
 }
-
-/* Cart badge */
 .cart-badge {
     background: #ff8b9b;
     padding: 3px 7px;
@@ -60,7 +47,6 @@ a {
     font-size: 11px;
 }
 
-/* Logo background */
 .logo-section {
     background: linear-gradient(to bottom, #fff8f5, #f7f3ef);
     text-align: center;
@@ -68,7 +54,6 @@ a {
     border-bottom: 1px solid #cfcfcf;
 }
 
-/* Logo structure */
 .logo-container {
     display: flex;
     justify-content: center;
@@ -105,11 +90,6 @@ a {
     letter-spacing: 3px;
     color: #7d9b7f;
 }
-
-
-/* -----------------------------------
-   LOGIN FORM STYLING
------------------------------------- */
 
 .login-container {
     display: flex;
@@ -206,7 +186,6 @@ input:focus {
     font-weight: bold;
 }
 
-/* Error message */
 .error-message {
     background: #ffdddd;
     color: #c20000;
@@ -218,10 +197,6 @@ input:focus {
     font-size: 14px;
 }
 
-
-/* -----------------------------------
-   MOBILE RESPONSIVE
------------------------------------- */
 @media (max-width: 480px) {
 
     body {
@@ -251,4 +226,5 @@ input:focus {
         padding: 20px;
     }
 }
+
 
