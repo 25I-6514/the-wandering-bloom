@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="CSS Cart Page.css">
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Wandering Bloom - Shopping Cart</title>
@@ -31,52 +31,36 @@
 
     <!-- Cart Content -->
     <div class="cart-container">
-        <div class="cart-header">
-            <h2>YOUR SHOPPING CART</h2>
-            <p>Review your selected floral arrangements</p>
+        <h1 style="color:#5A5A5A; font-family: 'Times New Roman'; text-align: center; margin-top: 40px;">
+            The Wandering Bloom
+        </h1>
+        <h2 style="color:#5A5A5A; font-family: 'Times New Roman'; text-align: center; margin-bottom: 30px;">
+            YOUR SHOPPING CART
+        </h2>
+
+        <div class="cart-menu">
+            <span>Product</span>
+            <span>Quantity</span>
+            <span>Price</span>
+            <span>Action</span>
+        </div>
+        
+        <div>
+            <hr class="line">
         </div>
 
-        <div class="cart-table-header">
-            <div class="row">
-                <div class="col-md-5">PRODUCT</div>
-                <div class="col-md-2">QUANTITY</div>
-                <div class="col-md-2">PRICE</div>
-                <div class="col-md-2">TOTAL</div>
-                <div class="col-md-1">ACTION</div>
-            </div>
-        </div>
+        <div id="products" class="cart-box"></div>
 
-        <div id="products" class="cart-items"></div>
-
-        <div class="cart-summary">
-            <div class="row">
-                <div class="col-md-8"></div>
-                <div class="col-md-4">
-                    <div class="total-section">
-                        <div class="subtotal">
-                            <span>Subtotal:</span>
-                            <span>PKR <span id="subtotal">0</span></span>
-                        </div>
-                        <div class="shipping">
-                            <span>Delivery:</span>
-                            <span>PKR 200</span>
-                        </div>
-                        <div class="grand-total">
-                            <span>Total:</span>
-                            <span>PKR <span id="total">200</span></span>
-                        </div>
-                        <button class="checkout-btn" onclick="proceedToCheckout()">PROCEED TO CHECKOUT</button>
-                    </div>
-                </div>
-            </div>
+        <div class="cart-total">
+            <h3>Total: PKR <span id="total">0</span></h3>
         </div>
 
         <div class="empty-cart-message" id="empty-cart" style="display: none;">
             <div class="empty-cart-content">
-                <div class="empty-cart-icon">🛒</div>
+                <div class="empty-cart-icon">🌸</div>
                 <h3>Your cart is empty</h3>
                 <p>Browse our collections to add beautiful floral arrangements</p>
-                <a href="categoriespage.html" class="btn-primary">SHOP NOW</a>
+                <a href="categoriespage.html" class="shop-now-btn">SHOP NOW</a>
             </div>
         </div>
     </div>
@@ -86,7 +70,6 @@
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
             const box = document.getElementById("products");
             const totalSpan = document.getElementById("total");
-            const subtotalSpan = document.getElementById("subtotal");
             const emptyCart = document.getElementById("empty-cart");
             const cartBadge = document.querySelector('.cart-badge');
 
@@ -99,65 +82,49 @@
                 box.innerHTML = "";
                 emptyCart.style.display = "block";
                 totalSpan.textContent = "0";
-                subtotalSpan.textContent = "0";
                 return;
             }
 
             emptyCart.style.display = "none";
             box.innerHTML = "";
-            let subtotal = 0;
+            let total = 0;
 
             cart.forEach((item, index) => {
                 const itemTotal = item.price * item.quantity;
-                subtotal += itemTotal;
+                total += itemTotal;
 
                 box.innerHTML += `
-                <div class="cart-item">
-                    <div class="row align-items-center">
-                        <div class="col-md-5">
-                            <div class="product-info">
-                                <div class="product-image">
-                                    <img src="${item.image || 'flower-default.jpg'}" alt="${item.name}">
-                                </div>
-                                <div class="product-details">
-                                    <h4>${item.name}</h4>
-                                    <p class="product-code">SKU: WB-${String(index + 1).padStart(3, '0')}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="quantity-controls">
-                                <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
-                                <span class="quantity">${item.quantity}</span>
-                                <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="price">PKR ${item.price}</div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="item-total">PKR ${itemTotal}</div>
-                        </div>
-                        <div class="col-md-1">
-                            <button class="delete-btn" onclick="removeItem(${index})">
-                                Delete
-                            </button>
-                        </div>
+                <div class="cart-row">
+                    <div class="cart-img">
+                        <img src="${item.image || 'flower-default.jpg'}" alt="${item.name}" style="width:80px; height:80px; object-fit:cover;">
+                    </div>
+
+                    <div class="cart-info">
+                        <p class="product-name">${item.name}</p>
+                    </div>
+
+                    <div class="qty-box">
+                        <button onclick="updateQuantity(${index}, -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button onclick="updateQuantity(${index}, 1)">+</button>
+                    </div>
+
+                    <div class="price">PKR ${itemTotal}</div>
+
+                    <div class="delete-button">
+                        <button onclick="removeItem(${index})" class="delete-btn">Delete</button>
                     </div>
                 </div>
+                <hr class="line">
                 `;
             });
 
-            const delivery = 200;
-            const total = subtotal + delivery;
-            
             totalSpan.textContent = total;
-            subtotalSpan.textContent = subtotal;
         }
 
         function updateQuantity(index, change) {
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
-            
+
             cart[index].quantity += change;
 
             if (cart[index].quantity <= 0) {
@@ -175,20 +142,9 @@
             displayCart();
         }
 
-        function proceedToCheckout() {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
-            if (cart.length === 0) {
-                alert('Your cart is empty. Please add items before checkout.');
-                return;
-            }
-            alert('Proceeding to checkout...');
-            // Here you would redirect to checkout page: window.location.href = 'checkout.html';
-        }
-
         window.onload = displayCart;
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
