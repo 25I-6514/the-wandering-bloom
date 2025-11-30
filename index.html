@@ -48,7 +48,8 @@
             <hr class="line">
             
             <div id="error-message" class="error-message"></div>
-                <form id="login-form">
+            
+            <form id="login-form">
                 <div class="form-row">
                     <label for="username">Username</label>
                     <div class="input-wrapper">
@@ -74,12 +75,6 @@
     </div>
 
     <script>
-        // Show stored users on page load
-        window.addEventListener('load', function() {
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const debugInfo = document.getElementById('debug-info');
-            });
-
         // Function to show login alert when header links are clicked
         function showLoginAlert(event) {
             event.preventDefault();
@@ -94,51 +89,30 @@
             const password = document.getElementById('password').value.trim();
             const errorMessage = document.getElementById('error-message');
             
-            console.log('=== LOGIN ATTEMPT ===');
-            console.log('Username entered:', username);
-            console.log('Password entered:', password);
-            
             // Get all registered users from localStorage
             const users = JSON.parse(localStorage.getItem('users') || '[]');
-            console.log('Total users in storage:', users.length);
-            console.log('All users:', users);
             
             // Check if user exists and password matches
-            const user = users.find(function(u) {
-                console.log('Checking user:', u.username, '- Match:', u.username === username && u.password === password);
-                return u.username === username && u.password === password;
-            });
+            const user = users.find(u => u.username === username && u.password === password);
             
             if (user) {
                 // Successful login
-                console.log('✅ Login successful for user:', username);
-                
-                // Store the logged-in user info
                 localStorage.setItem('currentUser', JSON.stringify({
                     username: user.username,
                     fullname: user.fullname,
                     email: user.email
                 }));
                 
-                // Show success message
                 alert('✅ Welcome back, ' + user.fullname + '!');
-                
-                // Redirect to home page
                 window.location.href = 'home.html';
             } else {
                 // Check if username exists
-                const usernameExists = users.some(function(u) {
-                    return u.username === username;
-                });
+                const usernameExists = users.some(u => u.username === username);
                 
                 if (usernameExists) {
-                    // Username exists but password is wrong
                     errorMessage.textContent = '❌ Incorrect password. Please try again.';
-                    console.log('❌ Password incorrect');
                 } else {
-                    // Username doesn't exist
                     errorMessage.textContent = '❌ Username not found. Please sign up first.';
-                    console.log('❌ Username not found');
                 }
                 
                 errorMessage.style.display = 'block';
