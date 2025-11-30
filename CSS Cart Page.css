@@ -9,10 +9,10 @@ body {
     font-family: Arial, sans-serif;
     background-color: #ffffff;
     color: #5A5A5A;
-    padding-top: 120px; /* Added padding for fixed header */
+    padding-top: 120px; /* Space for fixed header */
 }
 
-/* Header Styles - Fixed */
+/* Header Styles - EXACT match from your other pages */
 .main-header {
     background: white;
     position: fixed;
@@ -64,7 +64,6 @@ body {
     text-align: center;
     padding: 15px 0;
     background: white;
-    border-bottom: 2px solid #88A28B; /* Added border instead of second rectangle */
 }
 
 .logo {
