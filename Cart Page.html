@@ -3,141 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wandering Bloom - Shopping Cart</title>
-    <link rel="stylesheet" href="CSS Cart Page.css">
+    <link rel="stylesheet" href="categoriespage.css">
+    <title> The Wandering Bloom</title>
 </head>
 <body>
-    <!-- Fixed Header -->
-    <header class="main-header">
-        <div class="rectangle">
-            <div class="menu">
-                <a href="index.html">HOME</a>
-                <a href="categoriespage.html">CATEGORIES</a>
-                <a href="topseller.html">TOP SELLERS</a>
-                <a href="index.html#contact-section">CONTACT</a>
-                <a href="index.html#about-section">ABOUT</a>
-                <a href="cart.html" class="cart-link">CART <span class="cart-badge">0</span></a>
-            </div>
+    <div class="rectangle">
+        <div class="menu">
+            <a href="#">
+                <img src = "102123-200.png" alt = "arrow" style="width:30px; height:30px" />
+            </a>
+           <a href="categoriespage.html">HOME</a>
+            <a href="topseller.html">SHOP</a>
+            <a onclick="alert('contact us on wanderingbloom@gmail.com');">CONTACT</a>
+            <a href="about.txt">ABOUT</a>
+            <a href="Cart Page.html">
+                <img src = "C:\Users\Zoya\Desktop\Website - Copy\Website\shopping-cart-icon-md.png" alt = "cart" style="width:30px; height:30px" />
+            </a>
         </div>
-        <div class="logo-section">
-            <div class="logo">
-                <span class="logo-icon">🌸</span>
-                The Wandering Bloom
-            </div>
-            <p class="tagline">Curated Floral Excellence</p>
-        </div>
-    </header>
-
-    <!-- Cart Content -->
+    </div>
+    <h1>The Wandering Bloom</h1>
+     <hr class="line">
+    <h1 style="text-align: center; color:#000000">Your Shopping Cart</h1>
     <div class="cart-container">
-        <h1>The Wandering Bloom</h1>
-        <h2>YOUR SHOPPING CART</h2>
-
-        <div class="cart-menu">
-            <span>Product</span>
-            <span>Quantity</span>
-            <span>Price</span>
-            <span>Action</span>
-        </div>
-        
-        <div>
-            <hr class="line">
-        </div>
-
-        <div id="products" class="cart-box"></div>
-
-        <div class="cart-total">
-            <h3>Total: PKR <span id="total">0</span></h3>
-        </div>
-
-        <div class="empty-cart-message" id="empty-cart" style="display: none;">
-            <div class="empty-cart-content">
-                <div class="empty-cart-icon">🌸</div>
-                <h3>Your cart is empty</h3>
-                <p>Browse our collections to add beautiful floral arrangements</p>
-                <a href="categoriespage.html" class="shop-now-btn">SHOP NOW</a>
-            </div>
-        </div>
+        <table id="cartTable">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price (PKR)</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Remove</th>
+            </tr>
+        </table>
+        <p id="totalBox">Total: PKR 0</p>
+        <button class="pay-btn" onclick="proceed()">Proceed to Payment</button>
+        <p class="empty-msg" id="emptyMsg" style="display:none;">Your cart is empty!</p>
     </div>
 
     <script>
-        function displayCart() {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
-            const box = document.getElementById("products");
-            const totalSpan = document.getElementById("total");
-            const emptyCart = document.getElementById("empty-cart");
-            const cartBadge = document.querySelector('.cart-badge');
+        let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-            // Update cart badge
-            if (cartBadge) {
-                cartBadge.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-            }
+        function displayCart() {
+            const table = document.getElementById("cartTable");
+
+            while (table.rows.length > 1) table.deleteRow(1);
 
             if (cart.length === 0) {
-                box.innerHTML = "";
-                emptyCart.style.display = "block";
-                totalSpan.textContent = "0";
+                document.getElementById("emptyMsg").style.display = "block";
+                document.getElementById("totalBox").innerText = "Total: PKR 0";
                 return;
+            } else {
+                document.getElementById("emptyMsg").style.display = "none";
             }
 
-            emptyCart.style.display = "none";
-            box.innerHTML = "";
             let total = 0;
 
             cart.forEach((item, index) => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
+                let row = table.insertRow();
 
-                box.innerHTML += `
-                <div class="cart-row">
-                    <div class="cart-img">
-                        <img src="${item.image || 'flower-default.jpg'}" alt="${item.name}" style="width:80px; height:80px; object-fit:cover;">
-                    </div>
-
-                    <div class="cart-info">
-                        <p class="product-name">${item.name}</p>
-                    </div>
-
-                    <div class="qty-box">
-                        <button onclick="updateQuantity(${index}, -1)">-</button>
-                        <span>${item.quantity}</span>
-                        <button onclick="updateQuantity(${index}, 1)">+</button>
-                    </div>
-
-                    <div class="price">PKR ${itemTotal}</div>
-
-                    <div class="delete-button">
-                        <button onclick="removeItem(${index})" class="delete-btn">Delete</button>
-                    </div>
-                </div>
-                <hr class="line">
+                row.innerHTML = `
+                    <td><img src="${item.image}"></td>
+                    <td>${item.name}</td>
+                    <td>${item.price}</td>
+                    <td>
+                        <input type="number" class="qty-box" value="${item.quantity}" min="1"
+                            onchange="updateQty(${index}, this.value)">
+                    </td>
+                    <td>${item.price * item.quantity}</td>
+                    <td><button class="remove-btn" onclick="removeItem(${index})">X</button></td>
                 `;
+
+                total += item.price * item.quantity;
             });
 
-            totalSpan.textContent = total;
+            document.getElementById("totalBox").innerText = "Total: PKR " + total;
+            localStorage.setItem("totalBill", total);
+            localStorage.setItem("cartItems", JSON.stringify(cart));
         }
-
-        function updateQuantity(index, change) {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-            cart[index].quantity += change;
-
-            if (cart[index].quantity <= 0) {
-                cart.splice(index, 1);
-            }
-
-            localStorage.setItem("cart", JSON.stringify(cart));
+        function updateQty(index, qty) {
+            cart[index].quantity = parseInt(qty);
+            saveCart();
             displayCart();
         }
-
         function removeItem(index) {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
             cart.splice(index, 1);
-            localStorage.setItem("cart", JSON.stringify(cart));
+            saveCart();
             displayCart();
         }
-
-        window.onload = displayCart;
+        function saveCart() {
+            localStorage.setItem("cartItems", JSON.stringify(cart));
+        }
+        function proceed() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+            } else {
+                window.location.href = "Payment Page.html";
+            }
+        }
+        displayCart();
     </script>
 </body>
 </html>
