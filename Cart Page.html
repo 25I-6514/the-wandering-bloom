@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="CSS Cart Page.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wandering Bloom</title>
+</head>
+<body>
+    <div class="rectangle">
+        <div class="menu">
+            <a href="#">
+                <img src = "102123-200.png" alt = "arrow" style="width:30px; height:30px" />
+            </a>
+           <a href="categoriespage.html">HOME</a>
+            <a href="topseller.html">SHOP</a>
+            <a onclick="alert('contact us on wanderingbloom@gmail.com');">CONTACT</a>
+            <a href="about.txt">ABOUT</a>
+            <a href="Cart Page.html">
+                <img src = "C:\Users\Zoya\Desktop\Cart + Payment\shopping-cart-icon-md.png" alt = "cart" style="width:30px; height:30px" />
+            </a>
+        </div>
+    </div>
+    <h1>The Wandering Bloom</h1>
+    <h2>YOUR SHOPPING CART</h2>
+    <div class="menu">
+        <span>Product</span>
+        <span>Quantity</span>
+        <span>Price</span>
+    </div>
+    <div>
+        <hr class="line">
+    </div>
+    <div id="products" class="cart-box"></div>
+    <div class="cart-total">
+    <h3>Total: PKR <span id="total">0</span></h3>
+    </div>
+
+<script>
+
+    function displayCart() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const box = document.getElementById("products");
+        const totalSpan = document.getElementById("total");
+
+         box.innerHTML = "";
+         let total = 0;
+
+        cart.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+
+            box.innerHTML += `
+            <div class="cart-row">
+                <div class="cart-img">
+                    <img src="${item.image}" style="width:80px; height:80px; object-fit:cover;">
+                </div>
+
+                <div class="cart-info">
+                    <p class="product-name">${item.name}</p>
+                </div>
+
+                <div class="qty-box">
+                    <button onclick="updateQuantity(${index}, -1)">-</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="updateQuantity(${index}, 1)">+</button>
+                </div>
+
+                <div class="delete-button" onclick="removeItem(${index})">🗑️</div>
+
+                <div class="price">PKR ${itemTotal}</div>
+            </div>
+            <hr>
+            `;
+        });
+
+     totalSpan.textContent = total;
+    }
+
+    function updateQuantity(index, change) {
+         let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+         cart[index].quantity += change;
+
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1);
+        }
+
+         localStorage.setItem("cart", JSON.stringify(cart));
+         displayCart();
+    }
+
+    function removeItem(index) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+          cart.splice(index, 1);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          displayCart();
+    }
+
+    window.onload = displayCart;
+
+</script>
+</body>
+</html>

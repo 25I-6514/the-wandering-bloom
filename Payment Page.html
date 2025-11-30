@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="CSS Payment Page.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wandering Bloom</title>
+</head>
+
+<body>
+
+    <div class="rectangle">
+        <div class="menu">
+            <a href="Cart Page.html">
+                <img src="102123-200.png" alt="arrow" style="width:30px; height:30px" />
+            </a>
+            <a href="categoriespage.html">HOME</a>
+            <a href="topseller.html">SHOP</a>
+            <a onclick="alert('contact us on wanderingbloom@gmail.com');">CONTACT</a>
+            <a href="about.txt">ABOUT</a>
+            <a href="cart1.html">
+                <img src="C:\Users\Zoya\Desktop\Cart + Payment\shopping-cart-icon-md.png" alt="cart" style="width:30px; height:30px" />
+            </a>
+        </div>
+    </div>
+    <h1>Payment Details:</h1>
+    <div class="boxes">
+        <div class="left-box">
+
+            <h2>Contact Information:</h2>
+            <div class="form-row">
+                <label>Email:</label><br>
+                <input type="text" id="email">
+            </div>
+
+            <div class="form-row">
+                <label>Phone Number:</label><br>
+                <input type="number" id="phone-number">
+            </div>
+
+            <h3>Billing Address:</h3>
+
+            <div class="form-row">
+                <label>Full Name:</label><br>
+                <input type="text" id="full-name">
+            </div>
+
+            <div class="form-row">
+                <label>Address:</label><br>
+                <input type="text" id="address">
+            </div>
+
+            <h4>Payment Methods:</h4>
+
+            <div class="small-box">
+                <div class="payment-method">
+                    <input type="radio" name="payment" id="card-payment" value="card">
+                    <label for="card-payment">Card Payment</label>
+
+                    <div class="card-box">
+                        <label for="card-number">Card Number:</label><br>
+                        <input type="text" id="card-number">
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-box2">
+                <div class="cash-payment">
+                    <input type="radio" name="payment" id="cash-payment" value="cod">
+                    <label for="cash-payment">COD - Cash On Delivery</label>
+                    <p>Same Billing Address</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="right-box">
+            <h5>Order Summary:</h5>
+
+            <div id="ordersummaryproducts"></div>
+            <hr>
+
+            <p><b>Total: PKR <span id="ordersummarytotal">0</span></b></p>
+            <br>
+             <button id="checkoutBtn" style="padding:12px 25px; background-color: #3f7445; color:#fff; border:none ; cursor:pointer; font-size:16px; border-radius:6px;"> Checkout</button>
+        </div>
+
+    </div>
+    <script>
+
+    const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const itemsDiv = document.getElementById("ordersummaryproducts");
+    const totalSpan = document.getElementById("ordersummarytotal");
+
+    totalSpan.textContent = localStorage.getItem("totalBill") ;
+    let html = "";
+    cart.forEach(item => {
+        const productTotal = item.price * item.quantity;
+
+        html += `
+            <p>
+                <b>${item.name}</b><br>
+                Qty: ${item.quantity} — PKR ${productTotal}
+            </p>
+        `;
+    });
+    itemsDiv.innerHTML = html;
+
+    document.getElementById("checkoutBtn").addEventListener("click", function() {
+        alert("Thanks! Your order is confirmed.");
+
+        window.location.href = "categoriespage.html";
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+body {
+    background-color: #FDFBF6;
+}
+.rectangle {
+    width: 1345px;
+    height: 80px;
+    background-color: #FFF2F2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Times New Roman', Times, serif;
+    border: 1px solid black; 
+}
+h1 {
+    color: #88A28B;
+    font-size: 50px;
+}
+.center-box{
+    width: 450px;
+    height: 480px;
+    margin: 40px auto;
+    background-color: #AAC5AD;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Times New Roman', Times, serif;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+.center-box h2 {
+    margin-bottom: 10px;
+    text-align: center;
+    color: black;
+    font-size: 36px;
+    font-weight: 100;
+    line-height: 1;
+}
+.line {
+    border: none;
+    width: 100%;
+    background-color: black;
+    height: 1px;
+    margin: 5px auto 40px auto;
+}
+.form-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 5px auto;
+}
+.form-row label {
+    width: 25%;
+    font-size: 26px;
+    margin: 10px;
+}
+.form-row input {
+    background-color: #FDFBF6;
+    width: 260px;
+    padding: 8px 12px;
+    border: 1px solid black;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    max-width: 265px;
+}
+#signup {
+    background-color: #667E6B;
+    width: 390px;
+    height: 48px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto 0 auto;
+    font-size: 34px;
+    font-family: 'Times New Roman', Times, serif;
+    color: #FFFFFF;
+}
+#signup:hover {
+    background-color: #6E8873;
+}
