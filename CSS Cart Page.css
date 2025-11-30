@@ -1,4 +1,3 @@
-/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +11,7 @@ body {
     padding-top: 120px; /* Space for fixed header */
 }
 
-/* Header Styles */
+/* Main Header Styles */
 .main-header {
     background: white;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -62,6 +61,7 @@ body {
     right: -8px;
 }
 
+/* Logo Section */
 .logo-section {
     text-align: center;
     padding: 15px 0;
@@ -86,7 +86,6 @@ body {
     margin-top: 5px;
     font-style: italic;
 }
-
 /* Cart Page Specific Styles */
 .cart-container {
     max-width: 1000px;
@@ -355,3 +354,4 @@ h2 {
         font-size: 20px;
     }
 }
+
