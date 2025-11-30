@@ -166,47 +166,22 @@
     </div>
 
     <script>
-        let cart = [];
+    let cart = [];
+    
+    function addToCart(itemName) {
+       
+        cart.push(itemName);
 
-        function addToCart(itemName, itemPrice) {
-            // Add item to cart
-            cart.push({
-                name: itemName,
-                price: itemPrice,
-                image: itemImage
-            });
-            
-            // Show confirmation
-            alert(itemName + " has been added to your cart!");
-            
-            // Update cart count in navigation
-            updateCartCount();
-            
-            // Save cart to localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-        }
+        
+        document.querySelector(".cart-badge").textContent = cart.length;
 
-        function updateCartCount() {
-            const cartBadge = document.querySelector('.cart-badge');
-            if (cartBadge) {
-                cartBadge.textContent = cart.length;
-            }
-        }
-
-        // Load cart from localStorage on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedCart = localStorage.getItem('cart');
-            if (savedCart) {
-                cart = JSON.parse(savedCart);
-                updateCartCount();
-            }
-        });
-    </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+       
+        alert(itemName + " has been added to your cart!");
+    }
+</script>
 </body>
 </html>
+
 
 
 
