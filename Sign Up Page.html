@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="CSS Sign Up Page.css">
 </head>
 <body>
-    <!-- Enhanced Header -->
+   
     <header class="main-header">
         <div class="header-decoration">
             <span class="deco-flower">✿</span>
@@ -37,7 +37,7 @@
         </div>
     </header>
 
-    <!-- Sign Up Container -->
+    
     <div class="signup-container">
         <div class="signup-box">
             <div class="signup-header">
@@ -97,13 +97,13 @@
     </div>
 
     <script>
-        // Function to show login alert when header links are clicked
+        
         function showLoginAlert(event) {
             event.preventDefault();
             alert('🔒 Please login first to access this page!');
         }
 
-        // Sign up form handler
+        
         document.getElementById('signup-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -115,11 +115,11 @@
             const errorMessage = document.getElementById('error-message');
             const successMessage = document.getElementById('success-message');
             
-            // Hide previous messages
+         
             errorMessage.style.display = 'none';
             successMessage.style.display = 'none';
             
-            // Validation checks
+            
             if (fullname.length < 2) {
                 showError('❌ Please enter your full name.');
                 return;
@@ -145,7 +145,7 @@
                 return;
             }
             
-            // Check if username already exists
+           
             const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
             const userExists = existingUsers.some(user => user.username === username);
             
@@ -154,7 +154,7 @@
                 return;
             }
             
-            // Check if email already exists
+          
             const emailExists = existingUsers.some(user => user.email === email);
             
             if (emailExists) {
@@ -162,7 +162,7 @@
                 return;
             }
             
-            // Save the new user to localStorage
+            
             const newUser = {
                 fullname: fullname,
                 email: email,
@@ -175,11 +175,11 @@
             
             console.log('User registered successfully:', username);
             
-            // If all validations pass, show success and redirect
+           
             successMessage.textContent = '✓ Account created successfully! Redirecting to home...';
             successMessage.style.display = 'block';
             
-            // Redirect to home page after 1.5 seconds
+          
             setTimeout(function() {
                 window.location.href = 'index.html';
             }, 1500);
@@ -190,7 +190,7 @@
             errorMessage.textContent = message;
             errorMessage.style.display = 'block';
             
-            // Hide error after 4 seconds
+           
             setTimeout(function() {
                 errorMessage.style.display = 'none';
             }, 4000);
@@ -203,5 +203,6 @@
     </script>
 </body>
 </html>
+
 
 
