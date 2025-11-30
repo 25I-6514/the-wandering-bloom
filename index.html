@@ -80,16 +80,7 @@
         window.addEventListener('load', function() {
             const users = JSON.parse(localStorage.getItem('users') || '[]');
             const debugInfo = document.getElementById('debug-info');
-            
-            if (users.length === 0) {
-                debugInfo.innerHTML = '⚠️ <strong>No accounts found!</strong> Please create an account first by clicking Sign Up.';
-            } else {
-                debugInfo.innerHTML = '<strong>📋 Registered Accounts:</strong><br>';
-                users.forEach(function(user, index) {
-                    debugInfo.innerHTML += (index + 1) + '. Username: <strong>' + user.username + '</strong><br>';
-                });
-            }
-        });
+            });
 
         // Function to show login alert when header links are clicked
         function showLoginAlert(event) {
