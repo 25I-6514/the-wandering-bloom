@@ -246,6 +246,14 @@
 <script>
     let cart = [];
 
+    function addToCart(itemName, itemPrice) {
+            // Add item to cart
+            cart.push({
+                name: itemName,
+                price: itemPrice,
+                image: itemImage
+            });
+
     function addToCart(itemName) {
         cart.push(itemName);
         alert(itemName + " has been added to your cart!");
@@ -259,6 +267,7 @@
                 
 
    
+
 
 
 
