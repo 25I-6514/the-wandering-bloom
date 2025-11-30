@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - The Wandering Bloom</title>
-    <link rel="stylesheet" href="CSS Login Page.css">
+    <link rel="stylesheet" href="login-enhanced.css">
 </head>
 <body>
     <!-- Enhanced Header -->
@@ -48,6 +48,7 @@
             <hr class="line">
             
             <div id="error-message" class="error-message"></div>
+            <div id="debug-info" style="background: #e3f2fd; padding: 10px; border-radius: 5px; margin-bottom: 20px; font-size: 12px;"></div>
             
             <form id="login-form">
                 <div class="form-row">
@@ -75,6 +76,21 @@
     </div>
 
     <script>
+        // Show stored users on page load
+        window.addEventListener('load', function() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const debugInfo = document.getElementById('debug-info');
+            
+            if (users.length === 0) {
+                debugInfo.innerHTML = '⚠️ <strong>No accounts found!</strong> Please create an account first by clicking Sign Up.';
+            } else {
+                debugInfo.innerHTML = '<strong>📋 Registered Accounts:</strong><br>';
+                users.forEach(function(user, index) {
+                    debugInfo.innerHTML += (index + 1) + '. Username: <strong>' + user.username + '</strong><br>';
+                });
+            }
+        });
+
         // Function to show login alert when header links are clicked
         function showLoginAlert(event) {
             event.preventDefault();
@@ -89,15 +105,24 @@
             const password = document.getElementById('password').value.trim();
             const errorMessage = document.getElementById('error-message');
             
+            console.log('=== LOGIN ATTEMPT ===');
+            console.log('Username entered:', username);
+            console.log('Password entered:', password);
+            
             // Get all registered users from localStorage
             const users = JSON.parse(localStorage.getItem('users') || '[]');
+            console.log('Total users in storage:', users.length);
+            console.log('All users:', users);
             
             // Check if user exists and password matches
-            const user = users.find(u => u.username === username && u.password === password);
+            const user = users.find(function(u) {
+                console.log('Checking user:', u.username, '- Match:', u.username === username && u.password === password);
+                return u.username === username && u.password === password;
+            });
             
             if (user) {
                 // Successful login
-                console.log('Login successful for user:', username);
+                console.log('✅ Login successful for user:', username);
                 
                 // Store the logged-in user info
                 localStorage.setItem('currentUser', JSON.stringify({
@@ -113,14 +138,18 @@
                 window.location.href = 'index.html';
             } else {
                 // Check if username exists
-                const usernameExists = users.some(u => u.username === username);
+                const usernameExists = users.some(function(u) {
+                    return u.username === username;
+                });
                 
                 if (usernameExists) {
                     // Username exists but password is wrong
                     errorMessage.textContent = '❌ Incorrect password. Please try again.';
+                    console.log('❌ Password incorrect');
                 } else {
                     // Username doesn't exist
                     errorMessage.textContent = '❌ Username not found. Please sign up first.';
+                    console.log('❌ Username not found');
                 }
                 
                 errorMessage.style.display = 'block';
