@@ -7,19 +7,44 @@
     <link rel="stylesheet" href="CSS Login Page.css">
 </head>
 <body>
-    <!-- Simple Header with Shop Name Only -->
-    <header class="simple-header">
-        <div class="logo">
-            <span class="logo-icon">🌸</span>
-            The Wandering Bloom
+    <!-- Enhanced Header -->
+    <header class="main-header">
+        <div class="header-decoration">
+            <span class="deco-flower">✿</span>
+            <span class="deco-flower">✿</span>
+            <span class="deco-flower">✿</span>
         </div>
-        <p class="tagline">Curated Floral Excellence</p>
+        <div class="rectangle">
+            <div class="menu">
+                <a href="index.html">HOME</a>
+                <a href="categoriespage.html">CATEGORIES</a>
+                <a href="topseller.html">TOP SELLERS</a>
+                <a href="index.html#contact-section">CONTACT</a>
+                <a href="index.html#about-section">ABOUT</a>
+                <a href="cart.html" class="cart-link">CART <span class="cart-badge">0</span></a>
+            </div>
+        </div>
+        <div class="logo-section">
+            <div class="logo-container">
+                <div class="logo-flourish left">◈</div>
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">🌸</span>
+                    <span class="logo-text">The Wandering Bloom</span>
+                </a>
+                <div class="logo-flourish right">◈</div>
+            </div>
+            <p class="tagline">✦ Curated Floral Excellence ✦</p>
+        </div>
     </header>
 
     <!-- Login Container -->
     <div class="login-container">
         <div class="login-box">
-            <h2>WELCOME BACK</h2>
+            <div class="login-header">
+                <div class="flower-accent">🌺</div>
+                <h2>WELCOME BACK</h2>
+                <div class="flower-accent">🌺</div>
+            </div>
             <hr class="line">
             
             <div id="error-message" class="error-message"></div>
@@ -27,11 +52,17 @@
             <form id="login-form">
                 <div class="form-row">
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    </div>
                 </div>
                 <div class="form-row">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
                 </div>
                 <button type="submit" class="login-btn">LOGIN</button>
             </form>
@@ -58,7 +89,7 @@
                 window.location.href = 'index.html';
             } else {
                 // Show error message
-                errorMessage.textContent = 'Invalid username or password. Please try again.';
+                errorMessage.textContent = '❌ Invalid username or password. Please try again.';
                 errorMessage.style.display = 'block';
                 
                 // Hide error after 3 seconds
