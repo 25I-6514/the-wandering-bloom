@@ -1,39 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="CSS Sign Up Page.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wandering Bloom</title>
+    <title>Sign Up - The Wandering Bloom</title>
+    <link rel="stylesheet" href="CSS Sign Up Page.css">
 </head>
 <body>
-    <div class="rectangle">
-        <h1>The Wandering Bloom</h1>
+    <!-- Enhanced Header -->
+    <header class="main-header">
+        <div class="header-decoration">
+            <span class="deco-flower">✿</span>
+            <span class="deco-flower">✿</span>
+            <span class="deco-flower">✿</span>
+        </div>
+        <div class="rectangle">
+            <div class="menu">
+                <a href="index.html">HOME</a>
+                <a href="categoriespage.html">CATEGORIES</a>
+                <a href="topseller.html">TOP SELLERS</a>
+                <a href="index.html#contact-section">CONTACT</a>
+                <a href="index.html#about-section">ABOUT</a>
+                <a href="cart.html" class="cart-link">CART <span class="cart-badge">0</span></a>
+            </div>
+        </div>
+        <div class="logo-section">
+            <div class="logo-container">
+                <div class="logo-flourish left">◈</div>
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">🌸</span>
+                    <span class="logo-text">The Wandering Bloom</span>
+                </a>
+                <div class="logo-flourish right">◈</div>
+            </div>
+            <p class="tagline">✦ Curated Floral Excellence ✦</p>
+        </div>
+    </header>
+
+    <!-- Sign Up Container -->
+    <div class="signup-container">
+        <div class="signup-box">
+            <div class="signup-header">
+                <div class="flower-accent">🌺</div>
+                <h2>CREATE ACCOUNT</h2>
+                <div class="flower-accent">🌺</div>
+            </div>
+            <hr class="line">
+            
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+            
+            <form id="signup-form">
+                <div class="form-row">
+                    <label for="fullname">Full Name</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📧</span>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="username">Username</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">✨</span>
+                        <input type="text" id="username" name="username" placeholder="Choose a username" required minlength="4">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="password" name="password" placeholder="Create a password" required minlength="6">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="confirm-password">Confirm Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔐</span>
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required minlength="6">
+                    </div>
+                </div>
+                <button type="submit" class="signup-btn">SIGN UP</button>
+            </form>
+            
+            <div class="login-link">
+                <span>Already have an account?</span>
+                <a href="login.html">Login</a>
+            </div>
+        </div>
     </div>
-     <div class="center-box">
-        <h2>WELCOME!</h2>
-        <hr class="line">
-        <div class="signup">
-            <div class="form-row">
-                <label for="full-name">Full name:</label>
-                <input type="text" id="full-name">
-            </div>
-            <div class="form-row">
-                <label for="email">Email:</label>
-                <input type="text" id="email">
-            </div>
-            <div class="form-row">
-                <label for="password">Password:</label>
-                <input type="text" id="password">
-            </div>
-            <div class="form-row">
-                <label for="password">Confirm Password:</label>
-                <input type="text" id="password">
-            </div>
-            <button id="signup">
-                Sign Up
-            </button>
-        </div> 
-    </div>
+
+    <script>
+        // Sign up form handler
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fullname = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+            
+            // Hide previous messages
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            
+            // Validation checks
+            if (fullname.length < 2) {
+                showError('❌ Please enter your full name.');
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                showError('❌ Please enter a valid email address.');
+                return;
+            }
+            
+            if (username.length < 4) {
+                showError('❌ Username must be at least 4 characters long.');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError('❌ Password must be at least 6 characters long.');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showError('❌ Passwords do not match.');
+                return;
+            }
+            
+            // If all validations pass, show success and redirect
+            successMessage.textContent = '✓ Account created successfully! Redirecting to home...';
+            successMessage.style.display = 'block';
+            
+            // Redirect to home page after 1.5 seconds
+            setTimeout(function() {
+                window.location.href = 'index.html';
+            }, 1500);
+        });
+        
+        function showError(message) {
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            
+            // Hide error after 4 seconds
+            setTimeout(function() {
+                errorMessage.style.display = 'none';
+            }, 4000);
+        }
+        
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+    </script>
 </body>
 </html>
