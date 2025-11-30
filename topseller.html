@@ -80,22 +80,54 @@
     </div>
 
    <script>
-    let cart = [];
+    // Cart functionality
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
     
-    function addToCart(itemName) {
-       
-        cart.push(itemName);
-
+    // Update cart badge on page load
+    updateCartBadge();
+    
+    function addToCart(itemName, itemPrice, itemImage) {
+        // Check if item already exists in cart
+        const existingItem = cart.find(item => item.name === itemName);
         
-        document.querySelector(".cart-badge").textContent = cart.length;
-
-       
+        if (existingItem) {
+            // If item exists, increase quantity
+            existingItem.quantity += 1;
+        } else {
+            // If item doesn't exist, add new item
+            cart.push({
+                name: itemName,
+                price: parseInt(itemPrice),
+                image: itemImage,
+                quantity: 1
+            });
+        }
+        
+        // Save to localStorage
+        localStorage.setItem("cartItems", JSON.stringify(cart));
+        
+        // Update cart badge
+        updateCartBadge();
+        
+        // Show confirmation
         alert(itemName + " has been added to your cart!");
+    }
+    
+    function updateCartBadge() {
+        // Calculate total items in cart
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        
+        // Update badge text
+        const badgeElements = document.querySelectorAll(".cart-badge");
+        badgeElements.forEach(badge => {
+            badge.textContent = totalItems;
+        });
     }
 </script>
 
 </body>
 </html>
+
 
 
 
