@@ -1,31 +1,198 @@
+/* style.css for Categories Page */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #FDFBF6;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #5A5A5A;
+    padding-top: 120px; /* Space for fixed header */
 }
+
+/* Main Header Styles */
+.main-header {
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
 .rectangle {
-    width: 1345px;
-    height: 55px;
-    background-color: #88A28B;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Times New Roman', Times, serif;
-    border: 1px solid black;
+    background: #F7DDE2;
+    padding: 10px 0;
+    border-bottom: 2px solid #C8A2A8;
 }
+
 .menu {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0 auto;
-    gap: 200px;
+    justify-content: center;
+    gap: 30px;
 }
+
 .menu a {
-    font-size: 14px;
+    text-decoration: none;
+    color: #5A5A5A;
     font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #000000;
+    font-size: 14px;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
 }
-h1 {
-    color: #88A28B;
-    font-size: 40px;
-    margin: 20px;
+
+.menu a:hover {
+    color: #C8A2A8;
+}
+
+.cart-link {
+    position: relative;
+}
+
+.cart-badge {
+    background: #C8A2A8;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+}
+
+/* Logo Section */
+.logo-section {
+    text-align: center;
+    padding: 15px 0;
+    background: white;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5A5A5A;
+    font-family: 'Times New Roman', serif;
+}
+
+.logo-icon {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.tagline {
+    font-size: 14px;
+    color: #888;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 180px;
+    padding: 20px;
+    border: 1px solid #d3d3d3;
+    margin-left: 20px;
+    font-family: Arial;
+    background: white;
+}
+
+.sidebar h3 {
+    color: #5A5A5A;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #5A5A5A;
+}
+
+.sidebar-category {
+    margin: 5px 0;
+    padding: 5px 0;
+}
+
+.color-swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+/* Product Grid Styles */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 100px;
+    padding: 20px;
+}
+
+.product-card {
+    width: 230px;
+    border: 1px solid #ccc;
+    background: white;
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-name {
+    background: #C8A2A8;
+    padding: 5px;
+    font-size: 14px;
+    color: white;
+}
+
+.product-price {
+    padding: 5px;
+    background: white;
+}
+
+.add-to-cart {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    color: #5A5A5A;
+}
+
+.add-to-cart:hover {
+    color: #C8A2A8;
+}
+
+/* Page Headings */
+.page-title {
+    color: #5A5A5A;
+    font-family: 'Times New Roman', serif;
+    margin-left: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.page-subtitle {
+    text-align: center;
+    color: #5A5A5A;
+    font-family: 'Times New Roman', serif;
+    margin-bottom: 30px;
+}
+
+/* Layout */
+.page-container {
+    display: flex;
+    min-height: calc(100vh - 120px);
+}
+
+.sidebar-container {
+    width: 180px;
+    flex-shrink: 0;
+}
+
+.content-container {
+    flex-grow: 1;
+    padding-left: 40px;
 }
