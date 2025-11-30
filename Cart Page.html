@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="CSS Cart Page.css">
 </head>
 <body>
-    <!-- Header -->
     <header class="main-header">
         <div class="rectangle">
             <div class="menu">
@@ -27,8 +26,6 @@
             <p class="tagline">Curated Floral Excellence</p>
         </div>
     </header>
-
-    <!-- Main Content -->
     <div class="container">
         <h1 class="cart-title">Your Shopping Cart</h1>
         
@@ -45,7 +42,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Cart items will be inserted here by JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -81,7 +77,6 @@
     </div>
 
     <script>
-        // Cart functionality
         let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
         function displayCart() {
@@ -91,7 +86,6 @@
             const totalEl = document.getElementById('total');
             const deliveryEl = document.getElementById('delivery');
 
-            // Clear table
             tableBody.innerHTML = '';
 
             if (cart.length === 0) {
@@ -193,10 +187,10 @@
             window.location.href = "categoriespage.html";
         }
 
-        // Initialize cart display
         document.addEventListener('DOMContentLoaded', function() {
             displayCart();
         });
     </script>
 </body>
 </html>
+
