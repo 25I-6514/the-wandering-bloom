@@ -3,32 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wandering Bloom - Login</title>
-
-    <!-- CSS LINK -->
-    <link rel="stylesheet" href="CSS Login Page.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="CSS_Login_Page.css">
 </head>
 
 <body>
 
-    <!-- --------------------------------------------------
-         FIXED HEADER
-    --------------------------------------------------- -->
+    <!-- HEADER -->
     <header class="main-header">
 
-        <!-- Top Green Navigation Bar -->
         <div class="top-menu-bar">
             <nav class="menu">
-                <a href="#">HOME</a>
-                <a href="#">CATEGORIES</a>
-                <a href="#">TOP SELLERS</a>
-                <a href="#">CONTACT</a>
-                <a href="#">ABOUT</a>
-                <a href="#">CART <span class="cart-badge">0</span></a>
+                <a href="#" onclick="mustLogin()">HOME</a>
+                <a href="#" onclick="mustLogin()">CATEGORIES</a>
+                <a href="#" onclick="mustLogin()">TOP SELLERS</a>
+                <a href="#" onclick="mustLogin()">CONTACT</a>
+                <a href="#" onclick="mustLogin()">ABOUT</a>
+                <a href="#" onclick="mustLogin()">CART <span class="cart-badge">0</span></a>
             </nav>
         </div>
 
-        <!-- Logo Section -->
         <div class="logo-section">
             <div class="logo-container">
                 <span class="logo-flourish">⟡</span>
@@ -40,19 +34,13 @@
 
                 <span class="logo-flourish">⟡</span>
             </div>
-
             <p class="tagline">✦ CURATED FLORAL EXCELLENCE ✦</p>
         </div>
 
     </header>
 
-
-
-    <!-- --------------------------------------------------
-         LOGIN FORM
-    --------------------------------------------------- -->
+    <!-- LOGIN FORM -->
     <div class="login-container">
-
         <div class="login-box">
 
             <div class="login-header">
@@ -62,54 +50,46 @@
 
             <hr class="line">
 
-            <!-- Error message -->
             <div class="error-message" id="errorMsg">Invalid username or password</div>
 
-            <!-- Username -->
             <div class="form-row">
-                <label for="username">Username</label>
+                <label>Username</label>
                 <div class="input-wrapper">
                     <span class="input-icon">👤</span>
                     <input type="text" id="username" placeholder="Enter your username">
                 </div>
             </div>
 
-            <!-- Password -->
             <div class="form-row">
-                <label for="password">Password</label>
+                <label>Password</label>
                 <div class="input-wrapper">
                     <span class="input-icon">🔒</span>
                     <input type="password" id="password" placeholder="Enter your password">
                 </div>
             </div>
 
-            <!-- Login Button -->
             <button class="login-btn" onclick="validateLogin()">Login</button>
 
-            <!-- Sign Up Link -->
             <div class="sign-up">
-                <p>Don't have an account? <a href="#">Sign Up</a></p>
+                <p>Don’t have an account? <a href="SignUp_Page.html">Sign Up</a></p>
             </div>
-
         </div>
-
     </div>
 
-
-    <!-- --------------------------------------------------
-         SIMPLE LOGIN VALIDATION
-    --------------------------------------------------- -->
     <script>
+        function mustLogin() {
+            alert("Please login first.");
+        }
+
         function validateLogin() {
             let user = document.getElementById("username").value;
             let pass = document.getElementById("password").value;
-            let errorBox = document.getElementById("errorMsg");
 
             if (user === "" || pass === "") {
-                errorBox.style.display = "block";
+                document.getElementById("errorMsg").style.display = "block";
             } else {
-                errorBox.style.display = "none";
-                alert("Login successful! (You can link this to your backend later)");
+                alert("Login successful!");
+                window.location.href = "Home_Page.html"; // your actual home page
             }
         }
     </script>
