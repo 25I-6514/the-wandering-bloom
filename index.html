@@ -1,114 +1,117 @@
-<header class="main-header">
-    
-    <!-- Top Green Menu Bar -->
-    <div class="top-menu-bar">
-        <nav class="menu">
-            <a href="#" onclick="showLoginAlert(event)">HOME</a>
-            <a href="#" onclick="showLoginAlert(event)">CATEGORIES</a>
-            <a href="#" onclick="showLoginAlert(event)">TOP SELLERS</a>
-            <a href="#" onclick="showLoginAlert(event)">CONTACT</a>
-            <a href="#" onclick="showLoginAlert(event)">ABOUT</a>
-            <a href="#" onclick="showLoginAlert(event)" class="cart-link">
-                CART <span class="cart-badge">0</span>
-            </a>
-        </nav>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wandering Bloom - Login</title>
 
-    <!-- Logo Section -->
-    <div class="logo-section">
-        <div class="logo-container">
-            <span class="logo-flourish">◈</span>
-            
-            <div class="logo-wrapper">
-                <span class="logo-icon">🌸</span>
-                <span class="logo-text">The Wandering Bloom</span>
-            </div>
+    <!-- CSS LINK -->
+    <link rel="stylesheet" href="CSS_Login_Page.css">
+</head>
 
-            <span class="logo-flourish">◈</span>
+<body>
+
+    <!-- --------------------------------------------------
+         FIXED HEADER
+    --------------------------------------------------- -->
+    <header class="main-header">
+
+        <!-- Top Green Navigation Bar -->
+        <div class="top-menu-bar">
+            <nav class="menu">
+                <a href="#">HOME</a>
+                <a href="#">CATEGORIES</a>
+                <a href="#">TOP SELLERS</a>
+                <a href="#">CONTACT</a>
+                <a href="#">ABOUT</a>
+                <a href="#">CART <span class="cart-badge">0</span></a>
+            </nav>
         </div>
 
-        <p class="tagline">✦ CURATED FLORAL EXCELLENCE ✦</p>
-    </div>
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <div class="logo-container">
+                <span class="logo-flourish">⟡</span>
 
-</header>
+                <div class="logo-wrapper">
+                    <span class="logo-icon">🌸</span>
+                    <span class="logo-text">The Wandering Bloom</span>
+                </div>
+
+                <span class="logo-flourish">⟡</span>
+            </div>
+
+            <p class="tagline">✦ CURATED FLORAL EXCELLENCE ✦</p>
+        </div>
+
+    </header>
 
 
-    <!-- Login Box -->
+
+    <!-- --------------------------------------------------
+         LOGIN FORM
+    --------------------------------------------------- -->
     <div class="login-container">
+
         <div class="login-box">
+
             <div class="login-header">
-                <div class="flower-accent">🌺</div>
-                <h2>WELCOME BACK</h2>
-                <div class="flower-accent">🌺</div>
+                <span class="flower-accent">🌸</span>
+                <h2>Login</h2>
             </div>
 
             <hr class="line">
-            <div id="error-message" class="error-message"></div>
 
-            <form id="login-form">
-                <div class="form-row">
-                    <label for="username">Username</label>
-                    <div class="input-wrapper">
-                        <span class="input-icon">👤</span>
-                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                    </div>
+            <!-- Error message -->
+            <div class="error-message" id="errorMsg">Invalid username or password</div>
+
+            <!-- Username -->
+            <div class="form-row">
+                <label for="username">Username</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="username" placeholder="Enter your username">
                 </div>
-
-                <div class="form-row">
-                    <label for="password">Password</label>
-                    <div class="input-wrapper">
-                        <span class="input-icon">🔒</span>
-                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                    </div>
-                </div>
-
-                <button type="submit" class="login-btn">LOGIN</button>
-            </form>
-
-            <div class="sign-up">
-                <span>Don't have an account?</span>
-                <a href="Sign Up Page.html">Sign Up</a>
             </div>
+
+            <!-- Password -->
+            <div class="form-row">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+            </div>
+
+            <!-- Login Button -->
+            <button class="login-btn" onclick="validateLogin()">Login</button>
+
+            <!-- Sign Up Link -->
+            <div class="sign-up">
+                <p>Don't have an account? <a href="#">Sign Up</a></p>
+            </div>
+
         </div>
+
     </div>
 
+
+    <!-- --------------------------------------------------
+         SIMPLE LOGIN VALIDATION
+    --------------------------------------------------- -->
     <script>
-        function showLoginAlert(event) {
-            event.preventDefault();
-            alert('🔒 Please login first to access this page!');
-        }
+        function validateLogin() {
+            let user = document.getElementById("username").value;
+            let pass = document.getElementById("password").value;
+            let errorBox = document.getElementById("errorMsg");
 
-        document.getElementById('login-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const errorMessage = document.getElementById('error-message');
-
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-
-            const user = users.find(u => u.username === username && u.password === password);
-
-            if (user) {
-                localStorage.setItem('currentUser', JSON.stringify({
-                    username: user.username,
-                    fullname: user.fullname,
-                    email: user.email
-                }));
-
-                alert('✅ Welcome back, ' + user.fullname + '!');
-                window.location.href = 'home.html';
+            if (user === "" || pass === "") {
+                errorBox.style.display = "block";
             } else {
-                const exists = users.some(u => u.username === username);
-                errorMessage.textContent = exists
-                    ? '❌ Incorrect password. Please try again.'
-                    : '❌ Username not found. Please sign up first.';
-
-                errorMessage.style.display = "block";
-
-                setTimeout(() => errorMessage.style.display = "none", 3000);
+                errorBox.style.display = "none";
+                alert("Login successful! (You can link this to your backend later)");
             }
-        });
+        }
     </script>
 
 </body>
