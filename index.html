@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - The Wandering Bloom</title>
-    <link rel="stylesheet" href="CSS Login Page.css">
+    <link rel="stylesheet" href="login-enhanced.css">
 </head>
 <body>
     <!-- Enhanced Header -->
@@ -16,18 +16,18 @@
         </div>
         <div class="rectangle">
             <div class="menu">
-                <a href="index.html">HOME</a>
-                <a href="categoriespage.html">CATEGORIES</a>
-                <a href="topseller.html">TOP SELLERS</a>
-                <a href="index.html#contact-section">CONTACT</a>
-                <a href="index.html#about-section">ABOUT</a>
-                <a href="cart.html" class="cart-link">CART <span class="cart-badge">0</span></a>
+                <a href="#" onclick="showLoginAlert(event)">HOME</a>
+                <a href="#" onclick="showLoginAlert(event)">CATEGORIES</a>
+                <a href="#" onclick="showLoginAlert(event)">TOP SELLERS</a>
+                <a href="#" onclick="showLoginAlert(event)">CONTACT</a>
+                <a href="#" onclick="showLoginAlert(event)">ABOUT</a>
+                <a href="#" onclick="showLoginAlert(event)" class="cart-link">CART <span class="cart-badge">0</span></a>
             </div>
         </div>
         <div class="logo-section">
             <div class="logo-container">
                 <div class="logo-flourish left">◈</div>
-                <a href="index.html" class="logo">
+                <a href="#" onclick="showLoginAlert(event)" class="logo">
                     <span class="logo-icon">🌸</span>
                     <span class="logo-text">The Wandering Bloom</span>
                 </a>
@@ -75,17 +75,24 @@
     </div>
 
     <script>
+        // Function to show login alert when header links are clicked
+        function showLoginAlert(event) {
+            event.preventDefault();
+            alert('🔒 Please login first to access this page!');
+        }
+
         // Login form handler
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
             const errorMessage = document.getElementById('error-message');
             
             // Simple validation - customize these credentials
+            // Default: username = "admin" and password = "admin123"
             if (username === 'admin' && password === 'admin123') {
-                // Successful login
+                // Successful login - redirect to home page
                 window.location.href = 'index.html';
             } else {
                 // Show error message
