@@ -118,14 +118,14 @@
     </div>
 
     <script>
-        // Load cart data
+        
         const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
         const itemsDiv = document.getElementById("ordersummaryproducts");
         const totalSpan = document.getElementById("ordersummarytotal");
         const subtotalSpan = document.getElementById("subtotal");
         const deliverySpan = document.getElementById("delivery");
 
-        // Calculate totals
+        
         let subtotal = 0;
         let html = "";
         
@@ -149,7 +149,7 @@
         deliverySpan.textContent = `PKR ${delivery}`;
         totalSpan.textContent = total;
 
-        // Payment method toggle
+        
         const cardPayment = document.getElementById('card-payment');
         const cashPayment = document.getElementById('cash-payment');
         const cardDetails = document.getElementById('card-details');
@@ -162,17 +162,17 @@
             cardDetails.style.display = this.checked ? 'none' : 'block';
         });
 
-        // Initially hide card details
+      
         cardDetails.style.display = 'none';
 
-        // Card number formatting
+       
         document.getElementById('card-number').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
             let formattedValue = value.match(/.{1,4}/g)?.join(' ');
             e.target.value = formattedValue || value;
         });
 
-        // Expiry date formatting
+        
         document.getElementById('expiry-date').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length >= 2) {
@@ -181,12 +181,12 @@
             e.target.value = value;
         });
 
-        // CVV formatting
+       
         document.getElementById('cvv').addEventListener('input', function(e) {
             e.target.value = e.target.value.replace(/\D/g, '').substring(0, 3);
         });
 
-        // Form validation and checkout
+       
         document.getElementById("checkoutBtn").addEventListener("click", function() {
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone-number').value;
@@ -196,7 +196,7 @@
             const postalCode = document.getElementById('postal-code').value;
             const paymentMethod = document.querySelector('input[name="payment"]:checked');
 
-            // Basic validation
+         
             if (!email || !phone || !fullName || !address || !city || !postalCode || !paymentMethod) {
                 alert("Please fill in all required fields.");
                 return;
@@ -218,16 +218,17 @@
                 }
             }
 
-            // Process order
+           
             alert("Thank you! Your order has been confirmed and will be delivered soon.");
             
-            // Clear cart
+           
             localStorage.removeItem("cartItems");
             localStorage.removeItem("totalBill");
             
-            // Redirect to home page
+            
             window.location.href = "categoriespage.html";
         });
     </script>
 </body>
 </html>
+
