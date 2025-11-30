@@ -89,14 +89,40 @@
             const password = document.getElementById('password').value.trim();
             const errorMessage = document.getElementById('error-message');
             
-            // Simple validation - customize these credentials
-            // Default: username = "admin" and password = "admin123"
-            if (username === 'admin' && password === 'admin123') {
-                // Successful login - redirect to home page
+            // Get all registered users from localStorage
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            
+            // Check if user exists and password matches
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                // Successful login
+                console.log('Login successful for user:', username);
+                
+                // Store the logged-in user info
+                localStorage.setItem('currentUser', JSON.stringify({
+                    username: user.username,
+                    fullname: user.fullname,
+                    email: user.email
+                }));
+                
+                // Show success message
+                alert('✅ Welcome back, ' + user.fullname + '!');
+                
+                // Redirect to home page
                 window.location.href = 'index.html';
             } else {
-                // Show error message
-                errorMessage.textContent = '❌ Invalid username or password. Please try again.';
+                // Check if username exists
+                const usernameExists = users.some(u => u.username === username);
+                
+                if (usernameExists) {
+                    // Username exists but password is wrong
+                    errorMessage.textContent = '❌ Incorrect password. Please try again.';
+                } else {
+                    // Username doesn't exist
+                    errorMessage.textContent = '❌ Username not found. Please sign up first.';
+                }
+                
                 errorMessage.style.display = 'block';
                 
                 // Hide error after 3 seconds
