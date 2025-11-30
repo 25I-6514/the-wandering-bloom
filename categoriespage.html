@@ -250,6 +250,7 @@
 
     function addToCart(itemName) {
         cart.push(itemName);
+        document.querySelector(".cart-badge").textContent = cart.length;
         alert(itemName + " has been added to your cart!");
         console.log(cart);
     }
@@ -261,6 +262,7 @@
                 
 
    
+
 
 
 
