@@ -1,4 +1,6 @@
 
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
 
 let isWelcomeShown = false;
 
@@ -170,6 +172,30 @@ function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
+function addToCart(name, price = 0, image = 'flower-default.jpg') {
+    // Check if item already exists
+    let existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({ name, price, image, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    alert(`${name} has been added to your cart!`);
+}
+
+function updateCartCount() {
+    const badge = document.querySelector(".cart-badge");
+    if (badge) {
+        badge.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', updateCartCount);
+
 
 function debounce(func, wait) {
     let timeout;
