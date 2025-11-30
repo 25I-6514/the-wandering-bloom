@@ -1,33 +1,84 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="CSS Login Page.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wandering Bloom</title>
+    <title>Login - The Wandering Bloom</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <div class="rectangle">
-        <h1>The Wandering Bloom</h1>
-    </div>
-     <div class="center-box">
-        <h2>WELCOME BACK</h2>
-        <hr class="line">
-        <div class="login">
-            <div class="form-row">
-                <label for="username">Username:</label>
-                <input type="text" id="username">
+    <!-- Header matching main site -->
+    <header class="main-header">
+        <div class="rectangle">
+            <div class="menu">
+                <a href="index.html">HOME</a>
+                <a href="categoriespage.html">CATEGORIES</a>
+                <a href="topseller.html">TOP SELLERS</a>
+                <a href="index.html#contact-section">CONTACT</a>
+                <a href="index.html#about-section">ABOUT</a>
+                <a href="cart.html" class="cart-link">CART <span class="cart-badge">0</span></a>
             </div>
-            <div class="form-row">
-                <label for="password">Password:</label>
-                <input type="text" id="password">
-            </div>
-            <button id="login">Login</button>
+        </div>
+        <div class="logo-section">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🌸</span>
+                The Wandering Bloom
+            </a>
+            <p class="tagline">Curated Floral Excellence</p>
+        </div>
+    </header>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <div class="login-box">
+            <h2>WELCOME BACK</h2>
+            <hr class="line">
+            
+            <div id="error-message" class="error-message"></div>
+            
+            <form id="login-form">
+                <div class="form-row">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-row">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-btn">LOGIN</button>
+            </form>
+            
             <div class="sign-up">
-            <span>Don't have an account?</span><a href="Sign Up Page.html">Sign Up</a>
+                <span>Don't have an account?</span>
+                <a href="Sign Up Page.html">Sign Up</a>
             </div>
-        </div> 
+        </div>
     </div>
+
+    <script>
+        // Login form handler
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            
+            // Simple validation - you can customize these credentials
+            if (username === 'admin' && password === 'admin123') {
+                // Successful login
+                window.location.href = 'index.html';
+            } else {
+                // Show error message
+                errorMessage.textContent = 'Invalid username or password. Please try again.';
+                errorMessage.style.display = 'block';
+                
+                // Hide error after 3 seconds
+                setTimeout(function() {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
 </body>
 </html>
