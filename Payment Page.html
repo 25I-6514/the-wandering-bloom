@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="CSS Payment Page.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wandering Bloom</title>
+    <title>The Wandering Bloom - Payment</title>
+    <link rel="stylesheet" href="CSS Payment Page.css">
 </head>
-
 <body>
 
     <div class="rectangle">
@@ -18,99 +17,217 @@
             <a href="topseller.html">SHOP</a>
             <a onclick="alert('contact us on wanderingbloom@gmail.com');">CONTACT</a>
             <a href="about.txt">ABOUT</a>
-            <a href="cart1.html">
-                <img src="C:\Users\Zoya\Desktop\Cart + Payment\shopping-cart-icon-md.png" alt="cart" style="width:30px; height:30px" />
+            <a href="Cart Page.html">
+                <img src="shopping-cart-icon-md.png" alt="cart" style="width:30px; height:30px" />
             </a>
         </div>
     </div>
+    
     <h1>Payment Details:</h1>
+    
     <div class="boxes">
         <div class="left-box">
-
             <h2>Contact Information:</h2>
             <div class="form-row">
                 <label>Email:</label><br>
-                <input type="text" id="email">
+                <input type="email" id="email" required>
             </div>
 
             <div class="form-row">
                 <label>Phone Number:</label><br>
-                <input type="number" id="phone-number">
+                <input type="tel" id="phone-number" required>
             </div>
 
             <h3>Billing Address:</h3>
 
             <div class="form-row">
                 <label>Full Name:</label><br>
-                <input type="text" id="full-name">
+                <input type="text" id="full-name" required>
             </div>
 
             <div class="form-row">
                 <label>Address:</label><br>
-                <input type="text" id="address">
+                <input type="text" id="address" required>
+            </div>
+
+            <div class="form-row">
+                <label>City:</label><br>
+                <input type="text" id="city" required>
+            </div>
+
+            <div class="form-row">
+                <label>Postal Code:</label><br>
+                <input type="text" id="postal-code" required>
             </div>
 
             <h4>Payment Methods:</h4>
 
             <div class="small-box">
                 <div class="payment-method">
-                    <input type="radio" name="payment" id="card-payment" value="card">
+                    <input type="radio" name="payment" id="card-payment" value="card" required>
                     <label for="card-payment">Card Payment</label>
 
-                    <div class="card-box">
-                        <label for="card-number">Card Number:</label><br>
-                        <input type="text" id="card-number">
+                    <div class="card-details" id="card-details">
+                        <div class="card-box">
+                            <label for="card-number">Card Number:</label><br>
+                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+                        <div class="card-row">
+                            <div class="card-box">
+                                <label for="expiry-date">Expiry Date:</label><br>
+                                <input type="text" id="expiry-date" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div class="card-box">
+                                <label for="cvv">CVV:</label><br>
+                                <input type="text" id="cvv" placeholder="123" maxlength="3">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="small-box2">
                 <div class="cash-payment">
-                    <input type="radio" name="payment" id="cash-payment" value="cod">
+                    <input type="radio" name="payment" id="cash-payment" value="cod" required>
                     <label for="cash-payment">COD - Cash On Delivery</label>
                     <p>Same Billing Address</p>
                 </div>
             </div>
 
         </div>
+        
         <div class="right-box">
             <h5>Order Summary:</h5>
-
             <div id="ordersummaryproducts"></div>
             <hr>
-
-            <p><b>Total: PKR <span id="ordersummarytotal">0</span></b></p>
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span id="subtotal">PKR 0</span>
+            </div>
+            <div class="summary-row">
+                <span>Delivery:</span>
+                <span id="delivery">PKR 200</span>
+            </div>
+            <div class="summary-row total">
+                <span><b>Total:</b></span>
+                <span><b>PKR <span id="ordersummarytotal">0</span></b></span>
+            </div>
             <br>
-             <button id="checkoutBtn" style="padding:12px 25px; background-color: #3f7445; color:#fff; border:none ; cursor:pointer; font-size:16px; border-radius:6px;"> Checkout</button>
+            <button id="checkoutBtn">Complete Order</button>
         </div>
-
     </div>
+
     <script>
+        // Load cart data
+        const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const itemsDiv = document.getElementById("ordersummaryproducts");
+        const totalSpan = document.getElementById("ordersummarytotal");
+        const subtotalSpan = document.getElementById("subtotal");
+        const deliverySpan = document.getElementById("delivery");
 
-    const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-    const itemsDiv = document.getElementById("ordersummaryproducts");
-    const totalSpan = document.getElementById("ordersummarytotal");
+        // Calculate totals
+        let subtotal = 0;
+        let html = "";
+        
+        cart.forEach(item => {
+            const productTotal = item.price * item.quantity;
+            subtotal += productTotal;
 
-    totalSpan.textContent = localStorage.getItem("totalBill") ;
-    let html = "";
-    cart.forEach(item => {
-        const productTotal = item.price * item.quantity;
+            html += `
+                <div class="order-item">
+                    <b>${item.name}</b><br>
+                    Qty: ${item.quantity} — PKR ${productTotal}
+                </div>
+            `;
+        });
 
-        html += `
-            <p>
-                <b>${item.name}</b><br>
-                Qty: ${item.quantity} — PKR ${productTotal}
-            </p>
-        `;
-    });
-    itemsDiv.innerHTML = html;
+        const delivery = 200;
+        const total = subtotal + delivery;
 
-    document.getElementById("checkoutBtn").addEventListener("click", function() {
-        alert("Thanks! Your order is confirmed.");
+        itemsDiv.innerHTML = html;
+        subtotalSpan.textContent = `PKR ${subtotal}`;
+        deliverySpan.textContent = `PKR ${delivery}`;
+        totalSpan.textContent = total;
 
-        window.location.href = "categoriespage.html";
-    });
+        // Payment method toggle
+        const cardPayment = document.getElementById('card-payment');
+        const cashPayment = document.getElementById('cash-payment');
+        const cardDetails = document.getElementById('card-details');
 
-</script>
+        cardPayment.addEventListener('change', function() {
+            cardDetails.style.display = this.checked ? 'block' : 'none';
+        });
+
+        cashPayment.addEventListener('change', function() {
+            cardDetails.style.display = this.checked ? 'none' : 'block';
+        });
+
+        // Initially hide card details
+        cardDetails.style.display = 'none';
+
+        // Card number formatting
+        document.getElementById('card-number').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ');
+            e.target.value = formattedValue || value;
+        });
+
+        // Expiry date formatting
+        document.getElementById('expiry-date').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // CVV formatting
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 3);
+        });
+
+        // Form validation and checkout
+        document.getElementById("checkoutBtn").addEventListener("click", function() {
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone-number').value;
+            const fullName = document.getElementById('full-name').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const postalCode = document.getElementById('postal-code').value;
+            const paymentMethod = document.querySelector('input[name="payment"]:checked');
+
+            // Basic validation
+            if (!email || !phone || !fullName || !address || !city || !postalCode || !paymentMethod) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            if (paymentMethod.value === 'card') {
+                const cardNumber = document.getElementById('card-number').value;
+                const expiryDate = document.getElementById('expiry-date').value;
+                const cvv = document.getElementById('cvv').value;
+
+                if (!cardNumber || !expiryDate || !cvv) {
+                    alert("Please fill in all card details.");
+                    return;
+                }
+
+                if (cardNumber.replace(/\s/g, '').length !== 16) {
+                    alert("Please enter a valid 16-digit card number.");
+                    return;
+                }
+            }
+
+            // Process order
+            alert("Thank you! Your order has been confirmed and will be delivered soon.");
+            
+            // Clear cart
+            localStorage.removeItem("cartItems");
+            localStorage.removeItem("totalBill");
+            
+            // Redirect to home page
+            window.location.href = "categoriespage.html";
+        });
+    </script>
 </body>
 </html>
