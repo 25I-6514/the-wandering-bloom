@@ -8,7 +8,7 @@
     <title>The Wandering Bloom - Categories</title>
 </head>
 <body>
-    <!-- Fixed Header -->
+    
     <header class="main-header">
         <div class="rectangle">
             <div class="menu">
@@ -34,7 +34,7 @@
     </h2>
 
     <div style="display:flex;">
-        <!-- Sidebar -->
+       
         <div style="width:180px; padding:20px; border:1px solid #d3d3d3; margin-left:20px; font-family:Arial;">
             <h3 style="color:#5A5A5A; font-size:16px;">Occasions</h3>
             <p style="margin:5px 0;">
@@ -83,14 +83,14 @@
             </a>
         </div>
 
-        <!-- Products Grid -->
+       
         <div style="flex-grow:1; padding-left:40px;">
             <h3 style="text-align:center; color:#5A5A5A; font-family:'Times New Roman';">
                 Warm and earthy terracotta-themed arrangements
             </h3>
 
             <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:100px; padding:20px;">
-                <!-- Terracotta Product 1 -->
+                
                 <div style="width:230px; border:1px solid #ccc;">
                     <img src="flower2.jpg" style="width:100%; height:200px; object-fit:cover;">
                     <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Fiery Fairy</div>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
 
-                <!-- Terracotta Product 2 -->
+               
                 <div style="width:230px; border:1px solid #ccc;">
                     <img src="flower4.jpg" style="width:100%; height:200px; object-fit:cover;">
                     <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Fearfall</div>
@@ -108,7 +108,7 @@
                     </div>
                 </div>
 
-                <!-- Terracotta Product 3 -->
+                
                 <div style="width:230px; border:1px solid #ccc;">
                     <img src="flower8.jpg" style="width:100%; height:200px; object-fit:cover;">
                     <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Crimson Shadow</div>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
 
-                <!-- Terracotta Product 4 -->
+               
                 <div style="width:230px; border:1px solid #ccc;">
                     <img src="flower10.jpg" style="width:100%; height:200px; object-fit:cover;">
                     <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Hearts Desire</div>
@@ -126,7 +126,7 @@
                     </div>
                 </div>
 
-                <!-- Terracotta Product 5 -->
+                
                 <div style="width:230px; border:1px solid #ccc;">
                     <img src="flower12.jpg" style="width:100%; height:200px; object-fit:cover;">
                     <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Mocha Truffle</div>
@@ -139,21 +139,21 @@
     </div>
 
     <script>
-    // Cart functionality
+  
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
     
-    // Update cart badge on page load
+    
     updateCartBadge();
     
     function addToCart(itemName, itemPrice, itemImage) {
-        // Check if item already exists in cart
+        
         const existingItem = cart.find(item => item.name === itemName);
         
         if (existingItem) {
-            // If item exists, increase quantity
+            
             existingItem.quantity += 1;
         } else {
-            // If item doesn't exist, add new item
+            
             cart.push({
                 name: itemName,
                 price: parseInt(itemPrice),
@@ -162,21 +162,21 @@
             });
         }
         
-        // Save to localStorage
+       
         localStorage.setItem("cartItems", JSON.stringify(cart));
         
-        // Update cart badge
+       
         updateCartBadge();
         
-        // Show confirmation
+       
         alert(itemName + " has been added to your cart!");
     }
     
     function updateCartBadge() {
-        // Calculate total items in cart
+      
         const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
         
-        // Update badge text
+       
         const badgeElements = document.querySelectorAll(".cart-badge");
         badgeElements.forEach(badge => {
             badge.textContent = totalItems;
@@ -185,6 +185,7 @@
 </script>
 </body>
 </html>
+
 
 
 
