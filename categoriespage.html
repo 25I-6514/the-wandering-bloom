@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="categoriespage.css">
     <title>The Wandering Bloom - Categories</title>
 </head>
 <body>
@@ -28,255 +27,248 @@
             <p class="tagline">Curated Floral Excellence</p>
         </div>
     </header>
+    
     <h1>The Wandering Bloom</h1>
     <h2 style="color:#5A5A5A; font-family: 'Times New Roman'; margin-left:20px;">
-    BOUQUET CATEGORIES
-</h2>
+        BOUQUET CATEGORIES
+    </h2>
 
-<div style="display:flex;">
+    <div style="display:flex;">
+        <!-- Sidebar -->
+        <div style="width:180px; padding:20px; border:1px solid #d3d3d3; margin-left:20px; font-family:Arial;">
+            <h3 style="color:#5A5A5A; font-size:16px;">Occasions</h3>
+            <p style="margin:5px 0;">
+                <a href="weddings.html" style="text-decoration:none; color:#5A5A5A;">Weddings</a>
+            </p>
+            <p style="margin:5px 0;">
+                <a href="birthdays.html" style="text-decoration:none; color:#5A5A5A;">Birthdays</a>
+            </p>
+            <p style="margin:5px 0;">
+                <a href="anniverseries.html" style="text-decoration:none; color:#5A5A5A;">Anniversaries</a>
+            </p>
+            <p style="margin:5px 0;">
+                <a href="funeral.html" style="text-decoration:none; color:#5A5A5A;">Funerals</a>
+            </p>
+            
+            <h3 style="color:#5A5A5A; font-size:16px; margin-top:20px;">Colour themes</h3>
+            <a href="sagegreen.html" style="text-decoration:none; color:#5A5A5A;">
+                <div style="display:flex; align-items:center; gap:8px; margin:5px 0;">
+                    <div style="width:18px; height:18px; background:#88A28B; border-radius:50%;"></div> 
+                    Sage green
+                </div>
+            </a>
+            <a href="dustyrose.html" style="text-decoration:none; color:#5A5A5A;">
+                <div style="display:flex; align-items:center; gap:8px; margin:5px 0;">
+                    <div style="width:18px; height:18px; background:#C8A2A8; border-radius:50%;"></div> 
+                    Dusty rose
+                </div>
+            </a>
+            <a href="terracotta.html" style="text-decoration:none; color:#5A5A5A;">
+                <div style="display:flex; align-items:center; gap:8px; margin:5px 0;">
+                    <div style="width:18px; height:18px; background:#CC7355; border-radius:50%;"></div> 
+                    Terracotta
+                </div>
+            </a>
+            <a href="black.html" style="text-decoration:none; color:#5A5A5A;">
+                <div style="display:flex; align-items:center; gap:8px; margin:5px 0;">
+                    <div style="width:18px; height:18px; background:#5A5A5A; border-radius:50%;"></div> 
+                    Black night
+                </div>
+            </a>
+            <a href="blushpink.html" style="text-decoration:none; color:#5A5A5A;">
+                <div style="display:flex; align-items:center; gap:8px; margin:5px 0;">
+                    <div style="width:18px; height:18px; background:#F7DDE2; border-radius:50%;"></div> 
+                    Blush pink
+                </div>
+            </a>
+        </div>
 
-    
-    <div style="width:180px; padding:20px; border:1px solid #d3d3d3; margin-left:20px; font-family:Arial;">
+        <!-- Products Section -->
+        <div style="flex-grow:1; padding-left:40px;">
+            <h3 style="text-align:center; color:#5A5A5A; font-family:'Times New Roman';">
+                Choose from our curated floral collections
+            </h3>
 
-        <h3 style="color:#5A5A5A; font-size:16px;">Occasions</h3>
-        <p style="margin:5px 0;">
-    <a href="weddings.html" style="text-decoration:none; color:#5A5A5A;">Weddings</a>
-</p>
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr);gap:80px; padding:20px; justify-items:center;">
+                <!-- Product 1 -->
+                <div style="width:230px; border:1px solid #ccc;">
+                    <img src="flower1.jpg" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Lilac Dreams</div>
+                    <div style="padding:5px;">
+                        PKR : 1200 
+                        <span onclick="addToCart('Lilac Dreams', 1200, 'flower1.jpg')" 
+                            style="float:right; cursor:pointer; font-weight:bold;">+</span>
+                    </div>
+                </div>
 
-<p style="margin:5px 0;">
-    <a href="birthdays.html" style="text-decoration:none; color:#5A5A5A;">Birthdays</a>
-</p>
+                <!-- Product 2 -->
+                <div style="width:230px; border:1px solid #ccc;">
+                    <img src="flower2.jpg" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Fiery Fairy</div>
+                    <div style="padding:5px;">
+                        PKR : 1250 
+                        <span onclick="addToCart('Fiery Fairy', 1250, 'flower2.jpg')" 
+                            style="float:right; cursor:pointer; font-weight:bold;">+</span>
+                    </div>
+                </div>
 
-<p style="margin:5px 0;">
-    <a href="anniverseries.html" style="text-decoration:none; color:#5A5A5A;">Anniversaries</a>
-</p>
+                <!-- Product 3 -->
+                <div style="width:230px; border:1px solid #ccc;">
+                    <img src="flower3.jpg" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Amethyst Kiss</div>
+                    <div style="padding:5px;">
+                        PKR : 1700 
+                        <span onclick="addToCart('Amethyst Kiss', 1700, 'flower3.jpg')" 
+                            style="float:right; cursor:pointer; font-weight:bold;">+</span>
+                    </div>
+                </div>
 
-<p style="margin:5px 0;">
-    <a href="funeral.html" style="text-decoration:none; color:#5A5A5A;">Funerals</a>
-</p>
-        <h3 style="color:#5A5A5A; font-size:16px; margin-top:20px;">Colour themes</h3>
+                <!-- Product 4 -->
+                <div style="width:230px; border:1px solid #ccc;">
+                    <img src="flower4.jpg" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Fearfall </div>
+                    <div style="padding:5px;">
+                        PKR : 2000 
+                        <span onclick="addToCart('Fearfall', 2000, 'flower4.jpg')" 
+                            style="float:right; cursor:pointer; font-weight:bold;">+</span>
+                    </div>
+                </div>
 
-       <a href="sagegreen.html" style="text-decoration:none; color:#5A5A5A;">
-    <div style="display:flex; align-items:center; gap:8px; margin:5px 0;">
-        <div style="width:18px; height:18px; background:#88A28B; border-radius:50%;"></div> 
-        Sage green
+                <!-- Product 5 -->
+                <div style="width:230px; border:1px solid #ccc;">
+                    <img src="flower5.jpg" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Garden Whisper</div>
+                    <div style="padding:5px;">
+                        PKR : 1800 
+                        <span onclick="addToCart('Garden Whisper', 1800, 'flower5.jpg')" 
+                            style="float:right; cursor:pointer; font-weight:bold;">+</span>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div style="width:230px; border:1px solid #ccc;">
+                    <img src="flower6.jpg" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Vixen Veil</div>
+                    <div style="padding:5px;">
+                        PKR : 2000 
+                        <span onclick="addToCart('Vixen Veil', 2000, 'flower6.jpg')" 
+                            style="float:right; cursor:pointer; font-weight:bold;">+</span>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div style="width:230px; border:1px solid #ccc;">
+                    <img src="flower7.jpg" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Starry Night</div>
+                    <div style="padding:5px;">
+                        PKR : 1800 
+                        <span onclick="addToCart('Starry Night', 1800, 'flower7.jpg')" 
+                            style="float:right; cursor:pointer; font-weight:bold;">+</span>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div style="width:230px; border:1px solid #ccc;">
+                    <img src="flower8.jpg" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Crimson Shadow</div>
+                    <div style="padding:5px;">
+                        PKR : 1200 
+                        <span onclick="addToCart('Crimson Shadow', 1200, 'flower8.jpg')" 
+                            style="float:right; cursor:pointer; font-weight:bold;">+</span>
+                    </div>
+                </div>
+
+                <!-- Product 9 -->
+                <div style="width:230px; border:1px solid #ccc;">
+                    <img src="flower9.jpg" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Serene Willow </div>
+                    <div style="padding:5px;">
+                        PKR : 1800 
+                        <span onclick="addToCart('Serene Willow', 1800, 'flower9.jpg')" 
+                            style="float:right; cursor:pointer; font-weight:bold;">+</span>
+                    </div>
+                </div>
+
+                <!-- Product 10 -->
+                <div style="width:230px; border:1px solid#ccc;">
+                    <img src="flower10.jpg" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Hearts Desire</div>
+                    <div style="padding:5px;">
+                        PKR : 1500 
+                        <span onclick="addToCart('Hearts Desire', 1500, 'flower10.jpg')" 
+                            style="float:right; cursor:pointer; font-weight:bold;">+</span>
+                    </div>
+                </div>
+
+                <!-- Product 11 -->
+                <div style="width:230px; border:1px solid#ccc;">
+                    <img src="flower11.jpg" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Dewdrop Lining</div>
+                    <div style="padding:5px;">
+                        PKR : 1000 
+                        <span onclick="addToCart('Dewdrop Lining', 1000, 'flower11.jpg')" 
+                            style="float:right; cursor:pointer; font-weight:bold;">+</span>
+                    </div>
+                </div>
+
+                <!-- Product 12 -->
+                <div style="width:230px; border:1px solid#ccc;">
+                    <img src="flower12.jpg" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Mocha Truffle</div>
+                    <div style="padding:5px;">
+                        PKR : 2000 
+                        <span onclick="addToCart('Mocha Truffle', 2000, 'flower12.jpg')" 
+                            style="float:right; cursor:pointer; font-weight:bold;">+</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</a>
 
-
-<a href="dustyrose.html" style="text-decoration:none; color:#5A5A5A;">
-    <div style="display:flex; align-items:center; gap:8px; margin:5px 0;">
-        <div style="width:18px; height:18px; background:#C8A2A8; border-radius:50%;"></div> 
-        Dusty rose
-    </div>
-</a>
-
-
-<a href="terracotta.html" style="text-decoration:none; color:#5A5A5A;">
-    <div style="display:flex; align-items:center; gap:8px; margin:5px 0;">
-        <div style="width:18px; height:18px; background:#CC7355; border-radius:50%;"></div> 
-        Terracotta
-    </div>
-</a>
-
-
-<a href="black.html" style="text-decoration:none; color:#5A5A5A;">
-    <div style="display:flex; align-items:center; gap:8px; margin:5px 0;">
-        <div style="width:18px; height:18px; background:#5A5A5A; border-radius:50%;"></div> 
-        Black night
-    </div>
-</a>
-
-
-<a href="blushpink.html" style="text-decoration:none; color:#5A5A5A;">
-    <div style="display:flex; align-items:center; gap:8px; margin:5px 0;">
-        <div style="width:18px; height:18px; background:#F7DDE2; border-radius:50%;"></div> 
-        Blush pink
-    </div>
-</a>
-
+    <script>
+        // Initialize cart from localStorage or create empty array
+        let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
         
-    </div>
-
-    
-    <div style="flex-grow:1; padding-left:40px;">
-
-        <h3 style="text-align:center; color:#5A5A5A; font-family:'Times New Roman';">
-            Choose from our curated floral collections
-        </h3>
-
-       
-        <div style="display:grid; grid-template-columns: repeat(3, 1fr);gap:80px; padding:20px; justify-items:center;">
-
-
-
-  
-    <div style="width:230px; border:1px solid #ccc;">
-        <img src="flower1.jpg" style="width:100%; height:200px; object-fit:cover;">
-        <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Lilac Dreams</div>
-        <div style="padding:5px;">
-            PKR : 1200 <span onclick="addToCart('Lilac Dreams', 1200, 'flower1.jpg')" 
-      style="float:right; cursor:pointer; font-weight:bold;">
-    +</span>
-        </div>
-    </div>
-
-
-    <div style="width:230px; border:1px solid #ccc;">
-        <img src="flower2.jpg" style="width:100%; height:200px; object-fit:cover;">
-        <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Fiery Fairy</div>
-        <div style="padding:5px;">
-            PKR : 1250 <span onclick="addToCart('Fiery Fairy', 1250, 'flower2.jpg')" 
-      style="float:right; cursor:pointer; font-weight:bold;">
-    +</span>
-        </div>
-    </div>
-
-
-    <div style="width:230px; border:1px solid #ccc;">
-        <img src="flower3.jpg" style="width:100%; height:200px; object-fit:cover;">
-        <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Amethyst Kiss</div>
-        <div style="padding:5px;">
-            PKR : 1700 <span onclick="addToCart('Amethyst Kiss', 1700, 'flower3.jpg')" 
-      style="float:right; cursor:pointer; font-weight:bold;">
-    +</span>
-        </div>
-    </div>
-
-   
-    <div style="width:230px; border:1px solid #ccc;">
-        <img src="flower4.jpg" style="width:100%; height:200px; object-fit:cover;">
-        <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Fearfall </div>
-        <div style="padding:5px;">
-            PKR : 2000 <span onclick="addToCart('Fearfall', 2000, 'flower4.jpg')" 
-      style="float:right; cursor:pointer; font-weight:bold;">
-    +</span>
-        </div>
-    </div>
-
-
-    <div style="width:230px; border:1px solid #ccc;">
-        <img src="flower5.jpg" style="width:100%; height:200px; object-fit:cover;">
-        <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Garden Whisper</div>
-        <div style="padding:5px;">
-            PKR : 1800 <span onclick="addToCart('Garden Whisper', 1800, 'flower5.jpg')" 
-      style="float:right; cursor:pointer; font-weight:bold;">
-    +</span>
-        </div>
-    </div>
-
-
-    <div style="width:230px; border:1px solid #ccc;">
-        <img src="flower6.jpg" style="width:100%; height:200px; object-fit:cover;">
-        <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Vixen Veil</div>
-        <div style="padding:5px;">
-            PKR : 2000 <span onclick="addToCart('Vixen Veil', 2000, 'flower6.jpg')" 
-      style="float:right; cursor:pointer; font-weight:bold;">
-    +</span>
-        </div>
-    </div>
-
-
-    <div style="width:230px; border:1px solid #ccc;">
-        <img src="flower7.jpg" style="width:100%; height:200px; object-fit:cover;">
-        <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Starry Night</div>
-        <div style="padding:5px;">
-            PKR : 1800 <span onclick="addToCart('Starry Night', 1800, 'flower7.jpg')" 
-      style="float:right; cursor:pointer; font-weight:bold;">
-    +</span>
-        </div>
-    </div>
-
-
-    <div style="width:230px; border:1px solid #ccc;">
-        <img src="flower8.jpg" style="width:100%; height:200px; object-fit:cover;">
-        <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Crimson Shadow</div>
-        <div style="padding:5px;">
-            PKR : 1200 <span onclick="addToCart('Crimson Shadow', 1200, 'flower8.jpg')" 
-      style="float:right; cursor:pointer; font-weight:bold;">
-    +</span>
-        </div>
-    </div>
-
-   
-    <div style="width:230px; border:1px solid #ccc;">
-        <img src="flower9.jpg" style="width:100%; height:200px; object-fit:cover;">
-        <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Serene Willow </div>
-        <div style="padding:5px;">
-            PKR : 1800 <span onclick="addToCart('Serene Willow', 1800, 'flower9.jpg')" 
-      style="float:right; cursor:pointer; font-weight:bold;">
-    +</span>
-        </div>
-    </div>
-
- 
-    <div style="width:230px; border:1px solid#ccc;">
-        <img src="flower10.jpg" style="width:100%; height:200px; object-fit:cover;">
-        <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Hearts Desire</div>
-        <div style="padding:5px;">
-            PKR : 1500 <span onclick="addToCart('Hearts Desire', 1500, 'flower10.jpg')" 
-      style="float:right; cursor:pointer; font-weight:bold;">
-    +</span>
-        </div>
-    </div>
-
-    <div style="width:230px; border:1px solid#ccc;">
-        <img src="flower11.jpg" style="width:100%; height:200px; object-fit:cover;">
-        <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name :Dewdrop Lining</div>
-        <div style="padding:5px;">
-            PKR : 1000 <span onclick="addToCart('Dewdrop Lining', 1000, 'flower11.jpg')" 
-      style="float:right; cursor:pointer; font-weight:bold;">
-    +</span>
-        </div>
-    </div>
-
-  
-    <div style="width:230px; border:1px solid#ccc;">
-        <img src="flower12.jpg" style="width:100%; height:200px; object-fit:cover;">
-        <div style="background:#C8A2A8; padding:5px; font-size:14px;">Name : Mocha Truffle</div>
-        <div style="padding:5px;">
-            PKR : 2000 <span onclick="addToCart('Mocha Truffle', 2000, 'flower12.jpg')" 
-      style="float:right; cursor:pointer; font-weight:bold;">
-    +</span>
-        </div>
-    </div>
-
-
-
-
-
-  <script>
-    let cart = [];
-    
-    function addToCart(itemName) {
+        // Update cart badge on page load
+        updateCartBadge();
         
-        cart.push(itemName);
-
-       
-        document.querySelector(".cart-badge").textContent = cart.length;
-
-      
-        alert(itemName + " has been added to your cart!");
-    }
-</script>
-
-
-</body>    
-
-   
-                
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
+        function addToCart(itemName, itemPrice, itemImage) {
+            // Check if item already exists in cart
+            const existingItem = cart.find(item => item.name === itemName);
+            
+            if (existingItem) {
+                // If item exists, increase quantity
+                existingItem.quantity += 1;
+            } else {
+                // If item doesn't exist, add new item
+                cart.push({
+                    name: itemName,
+                    price: itemPrice,
+                    image: itemImage,
+                    quantity: 1
+                });
+            }
+            
+            // Save to localStorage
+            localStorage.setItem("cartItems", JSON.stringify(cart));
+            
+            // Update cart badge
+            updateCartBadge();
+            
+            // Show confirmation
+            alert(itemName + " has been added to your cart!");
+        }
+        
+        function updateCartBadge() {
+            // Calculate total items in cart
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            // Update badge text
+            const badgeElements = document.querySelectorAll(".cart-badge");
+            badgeElements.forEach(badge => {
+                badge.textContent = totalItems;
+            });
+        }
+    </script>
+</body>
+</html>
